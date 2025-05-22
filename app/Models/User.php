@@ -40,6 +40,10 @@ class User extends Authenticatable
         return $this->hasMany(Request::class);
     }
 
+    public function TeacherCourseGroup()
+    {
+        return $this->hasMany(TeacherCourseGroup::class);
+    }
 
     public function subdomains()
     {

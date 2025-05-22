@@ -22,7 +22,7 @@ class Module extends Model
     ];
 
     public function course(){
-        return $this->belongsTo(Module::class);
+        return $this->belongsTo(Course::class);
     }
 
 }

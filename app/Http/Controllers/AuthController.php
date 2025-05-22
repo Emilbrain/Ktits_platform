@@ -18,6 +18,10 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
+    public function showIndex(){
+        return view('page.training-system');
+    }
+
     public function showConfirm()
     {
         return view('page.auth.confirm');

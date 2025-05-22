@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Database;
 use App\Models\FileZilla;
+use App\Models\TeacherCourseGroup;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -28,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $fileZilla = FileZilla::where('user_id', auth()->id())->first();
             $database = Database::where('user_id', auth()->id())->first();
+            if (auth()->check() && auth()->user()->role === 'teacher') {
+                $groups = TeacherCourseGroup::with('group')
+                    ->where('teacher_id', auth()->id())
+                    ->get()
+                    ->unique('group_id')
+                    ->values();
+                $view->with('groups', $groups);
+            }
             $view->with('fileZilla', $fileZilla);
             $view->with('database', $database);
         });

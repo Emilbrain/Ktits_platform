@@ -235,7 +235,7 @@
         </li>
         <li class="{{request()->is('teacher/groups') ? 'active' : ''}}"><a href="{{ route('teacher.groups')}}"><i class='bx bx-store-alt'></i>Группы</a></li>
         <li class="{{ request()->is('teacher/courses')|| request()->is('teacher/courses/*') ? 'active' : '' }}">
-            <a href="{{ route('student.courses') }}">
+            <a href="{{ route('teacher.courses') }}">
                 <i class='bx bx-analyse'></i> Курсы
                 <i class="bx"></i>
             </a>
@@ -318,7 +318,7 @@
                 <div class="w-full">
                     <p class="text-md">Данные для платформы</p>
                     <div class="mt-2">
-                        <p class=""><span class="text-[#677483]">Логин: </span>{{ auth()->user()->username }}</p>
+                        <p class=""><span class="text-[#677483]">Логин: </span>{{ auth()->user()->login }}</p>
                         <p class=""><span class="text-[#677483]">Пароль: </span>{{ auth()->user()->pp }}</p>
                     </div>
                 </div>
@@ -347,12 +347,13 @@
                 <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center">
                     <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
                     <div class="grid grid-cols-2 w-full gap-3">
-                        <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                            <a href="" class="text-md"><p class="text-[14px] mb-1">Группа</p>437/10</a>
-                        </div>
-                        <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                            <a href="" class="text-md"><p class="text-[14px] mb-1">Группа</p>437/10</a>
-                        </div>
+                        @forelse($groups as $group)
+                            <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
+                                <a href="{{route('teacher.one.group', $group->group->id)}}" class="text-md"><p class="text-[14px] mb-1">Группа</p>{{$group->group->title}}/10</a>
+                            </div>
+                        @empty
+                            <h2 class="col-span-4">Нет ни одной группы в списке </h2>
+                        @endforelse
                     </div>
                 </div>
             </div>

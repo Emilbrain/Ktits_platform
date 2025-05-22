@@ -149,14 +149,7 @@ class AdminController extends Controller
         $userID = $user['user']->id;
 
         if ($role === 'student') {
-            $createDomain = [
-                'status' => 'success',
-                'ftPLogin' => 'ftp_' . $login,
-                'ftPPassword' => '123456',
-                'dbLogin' => 'db_' . $login,
-                'dbPassword' => 'secret',
-                'link' => $login . '.localhost', // можно потом отобразить как ссылку
-            ];
+            $createDomain = $this->begetApiService->createSiteAndRetrieveIds($login);
 
             if ($createDomain['status'] === 'success') {
                 $this->fileZillaService->createFileZilla([
@@ -441,6 +434,12 @@ class AdminController extends Controller
         $teacherId = $request->input('teacher');
         $groupId = $request->input('group');
         $courseIds = $request->input('courses', []);
+
+
+        DB::table('teacher_course_groups')
+            ->where('teacher_id', $teacherId)
+            ->where('group_id', $groupId)
+            ->delete();
 
         if ($teacherId && $groupId && !empty($courseIds)) {
             foreach ($courseIds as $courseId) {

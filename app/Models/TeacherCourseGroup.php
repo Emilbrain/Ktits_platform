@@ -14,4 +14,21 @@ class TeacherCourseGroup extends Model
         'course_id',
         'group_id',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Курс
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    // Группа
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

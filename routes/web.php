@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 // Доступ для всех авторизованных пользователей
 Route::middleware('auth')->group(function () {
-
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.store');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -34,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/theory', [StudentController::class, 'showTheory'])->name('student.theory');
         Route::get('/theory/modules',[StudentController::class, 'showModules'])->name('student.theory.modules');
+        Route::get('/theory/one-modules',[StudentController::class, 'showOneModules'])->name('student.theory.one-module');
     });
 
     // Маршруты для преподавателей
@@ -41,13 +41,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [TeacherController::class, 'showMain'])->name('teacher.main');
         Route::get('/requests', [TeacherController::class, 'showRequest'])->name('teacher.request');
         Route::get('/groups', [TeacherController::class, 'showGroups'])->name('teacher.groups');
-        Route::get('/groups/{id}/group', [TeacherController::class, 'showOneGroup'])->name('teacher.one.group');
+
+        Route::get('/courses', [TeacherController::class, 'showCourses'])->name('teacher.courses');
+        Route::get('/courses/course/{id}', [TeacherController::class, 'showOneCourses'])->name('teacher.show.course');
+
+        Route::get('/courses/add/module/{id}', [TeacherController::class, 'showAddModule'])->name('teacher.add.module');
+        Route::post('/courses/add/module/store', [TeacherController::class, 'storeModule'])->name('teacher.store.module');
+
+        Route::get('/course/module/{id}/edit', [TeacherController::class, 'showEditModule'])->name('teacher.edit.module');
+        Route::put('/course/module/{id}/update', [TeacherController::class, 'updateModule'])->name('teacher.update.module');
+        Route::post('/courses/module/destroy/{id}', [TeacherController::class, 'destroyModule'])->name('teacher.module.delete');
+
+        Route::put('/task/update/{id}', [TaskController::class, 'updateStatus'])->name('teacher.task.update');
+
+        Route::get('/group/{id}', [TeacherController::class, 'showOneGroup'])->name('teacher.one.group');
         Route::get('/setting', [TeacherController::class, 'showSetting'])->name('teacher.setting');
         Route::post('/setting/update/telegram', [TeacherController::class, 'updateTelegramUserName'])->name('teacher.setting.update.telegram');
     });
 
     // Маршруты для администраторов
     Route::prefix('admin')->group(function () {
+        Route::get('/test', [AuthController::class, 'showIndex'])->name('admin.test');
+
         Route::get('/', [AdminController::class, 'showMain'])->name('admin.main');
         Route::get('/generate', [AdminController::class, 'showGenerate'])->name('admin.generate');
         Route::post('/generate', [AdminController::class, 'createUser'])->name('admin.generate.store');

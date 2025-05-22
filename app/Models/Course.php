@@ -25,4 +25,9 @@ class Course extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function TeacherCourseGroup()
+    {
+        return $this->hasMany(TeacherCourseGroup::class);
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('includes.layout')
+    @extends('includes.layout')
 @section('h2-name', 'Назначить преподавателя')
 @section('content')
     <div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md">

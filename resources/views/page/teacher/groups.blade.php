@@ -4,10 +4,10 @@
     <!-- Main Content -->
     <div class="grid grid-cols-4 gap-5">
         @forelse($groups as $group)
-            <a href="{{route('teacher.one.group', $group->id)}}" class="w-full bg-white rounded-xl p-3 flex flex-col items-center gap-3 justify-center">
+            <a href="{{route('teacher.one.group', $group->group->id)}}" class="w-full bg-white rounded-xl p-3 flex flex-col items-center gap-3 justify-center">
                 {{--                        php--}}
                 <img src="{{ asset('images/user.png') }}" alt="" class="h-28">
-                <h4 class="text-md">{{$group->title}} / {{$group->student_count}}</h4>
+                <h4 class="text-md">{{$group->group->title}} / </h4>
             </a>
         @empty
             <h2 class="col-span-4">Нет ни одной группы в списке </h2>

@@ -5,7 +5,7 @@
         <div class="w-full flex gap-5">
             <div class="w-1/4 bg-white rounded-xl flex flex-col items-center p-4 gap-3">
                 <img src="{{ asset('storage/' . $course->logo) }}" alt="" class="h-full max-h-36 object-cover">
-                <h4 class="text-md">{{ $course->description }}</h4>
+                <h4 class="text-md">{{ $course->title }}</h4>
             </div>
             <div class="w-3/4 bg-white rounded-xl px-4 pt-4 pb-3 flex flex-col gap-3 justify-between">
                 {{ $course->description }}

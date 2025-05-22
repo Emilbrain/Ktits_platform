@@ -166,5 +166,9 @@ class StudentController extends Controller
     {
         return view('page.student.modules');
     }
+    public function showOneModules()
+    {
+        return view('page.student.one-module');
+    }
 }
 
