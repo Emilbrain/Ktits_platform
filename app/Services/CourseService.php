@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Request as RequestModel;
 use App\Services\TaskService;
@@ -24,6 +25,16 @@ class CourseService
         return $data;
     }
 
+    public function updateCourse(Request $request, Course $course): array
+    {
+        $data = $this->validateUpdateCourse($request);
+
+        if ($request->filled('title') && $request->input('title') !== $course->title) {
+            $data['slug'] = Str::slug($request->input('title'));
+        }
+
+        return $data;
+    }
     private function validateCreateCourse($request)
     {
         return $request->validate([
@@ -43,6 +54,24 @@ class CourseService
                 'logo.image' => 'Файл, загружаемый в поле "Логотип", должен быть изображением.',
                 'logo.mimes' => 'Поле "Логотип" должно быть файлом формата: jpeg, png, jpg, svg.',
                 'logo.max' => 'Размер файла "Логотип" не должен превышать 10 МБ.',
+            ]);
+
+    }
+
+    private function validateUpdateCourse($request)
+    {
+        return $request->validate([
+            'title' => 'required|max:255|unique:courses,title,'. $request->id,
+            'description' => 'required|max:255',
+        ],
+            [
+                'title.required' => 'Поле "Название" обязательно для заполнения.',
+                'title.max' => 'Поле "Название" не должно превышать 255 символов.',
+                'title.unique' => 'Курс с таким названием уже существует.',
+
+                'description.required' => 'Поле "Описание" обязательно для заполнения.',
+                'description.max' => 'Поле "Описание" не должно превышать 255 символов.',
+
             ]);
 
     }

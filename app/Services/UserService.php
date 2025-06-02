@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 class UserService
 {
 
-    private ?string $telegramUsername;
+    private ?string $telegramфUsername;
 
     public function __construct()
     {

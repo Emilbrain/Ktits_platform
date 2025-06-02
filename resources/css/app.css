@@ -4,6 +4,163 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.cont{
+    position: relative;
+}
+
+.clip-left.active-card{
+    clip-path: polygon(0 0, calc(100% - 125px) 0, 100% 100%, 0% 100%);
+    border-radius: 10px 0 0 10px;
+    background: #3F83F8;
+    color: white;
+}
+.clip-left h3{
+    width: 430px;
+}
+
+.clip-left.active-card h3{
+    width: 610px;
+}
+
+.clip-left{
+    clip-path: polygon(0% 0%, 100% 0, calc(100% - 125px) 100%, 0 100%);
+    background: #3F83F8;
+    width: 470px;
+    border-radius: 10px 0 0 10px;
+    border: 2px solid  #3F83F8;
+    position: relative;
+}
+
+
+
+.clip-left::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0% 0%, 100% 0, calc(100% - 125px) 100%, 0 100%);
+    background: white;
+    left: 0;
+    top: 0;
+    z-index: -10;
+    border-radius: 0.5rem;
+}
+
+.clip-right {
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 125px 100%);
+    background: #3F83F8;
+    border: 2px solid  #3F83F8;
+    position: relative;
+    border-radius: 0 10px 10px 0;
+    width: 470px;
+}
+
+.clip-right h3{
+    position: absolute;
+    right: 0;
+    width: 350px;
+}
+
+.clip-right.active-card{
+    clip-path: polygon(125px 0%, 1000% 0, 100% 100%, 0 100%);
+    background: #3F83F8;
+    color: white;
+    position: absolute;
+    right: 8%;
+}
+
+.clip-right.active-card h3{
+    width: 610px;
+}
+.clip-right::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 125px 100%);
+    background: white;
+    left: 0;
+    top: 0;
+    z-index: -10;
+    border-radius: 0.5rem;
+}
+.clip-right.active-card::after,
+.clip-left.active-card::after
+{
+    content: " ";
+    display: none;
+}
+
+.active-card{
+    width: 700px;
+}
+
+.details-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hidden-btn {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .clip-left,
+    .clip-right,
+    .clip-left::after,
+    .clip-right::after,
+    .clip-left.active-card,
+    .clip-right.active-card {
+        clip-path: none !important;
+        width: 100% !important;
+        border-radius: 10px !important;
+        position: static !important;
+    }
+
+    .clip-right::after,
+    .clip-left::after
+    {
+        content: " ";
+        display: none;
+    }
+
+    .clip-right,
+    .clip-left{
+        background: white;
+    }
+
+    .clip-left h3,
+    .clip-right h3,
+    .clip-left.active-card h3,
+    .clip-right.active-card h3 {
+        width: 100% !important;
+        position: static !important;
+    }
+
+    .clip-right.active-card {
+        right: 0 !important;
+    }
+
+    .details-btn {
+        position: static !important;
+        margin-top: 1rem;
+    }
+
+    #card1,
+    #card2 {
+        padding: 2rem 1.25rem !important; /* уменьшенные отступы */
+    }
+
+    #descBlock,
+    #infoBlock {
+        width: 100% !important;
+    }
+
+    .flex.gap-2.mt-4 {
+        flex-direction: column;
+    }
+}
+
 h1 {
     font-size: 2em; /* примерно соответствует стандартному размеру <h1> */
 }

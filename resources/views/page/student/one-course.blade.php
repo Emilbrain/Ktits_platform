@@ -17,6 +17,11 @@
                             Выполнено на {{ $course->progress }} %
                         </button>
                     </form>
+                @elseif(isset($request) && $request->status !== 'accepted')
+                    <button disabled
+                            class="flex justify-start text-gray-700 bg-yellow-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                        Ваша заявка на рассмотрении
+                    </button>
                 @else
                     <form action="{{ route('student.request.record', $course->id) }}" method="post">
                         @csrf
@@ -36,18 +41,17 @@
                     <div
                         class="flex items-center justify-between w-full p-5 font-medium text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3">
                         <span>{{ $module->title }}</span>
-                        <div
-                            class="cursor-pointer
+                        <div class="cursor-pointer
                                 @if($module->status_and === 'В ожидании проверки')
-                                bg-yellow-100
-                                text-black
+                                bg-yellow-100 text-black
                                 @elseif($module->status_and === 'Выполнено')
                                 bg-green-500 text-white
                                 @elseif($module->status_and === 'Ошибка выполнения')
                                 bg-red-500 text-white
                                 @else
                                 bg-blue-700 text-white
-                                @endif font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600">
+                                @endif
+                                font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600">
                             @if($module->status_and)
                                 {{ $module->status_and }}
                             @else

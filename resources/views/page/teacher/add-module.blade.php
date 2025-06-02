@@ -5,7 +5,7 @@
         <h1 class="text-2xl font-bold mb-4">Добавить модуль</h1>
 
         <!-- Форма создания контента -->
-        <form id="quillForm" method="POST" action="{{ route('teacher.store.module') }}">
+        <form id="quillForm" method="POST" action="{{ route('teacher.store.module') }}" enctype="multipart/form-data">
             @csrf
             <!-- Поле для названия модуля -->
             <div class="mb-4">
@@ -18,12 +18,50 @@
                 @enderror
             </div>
 
+            <div class="mb-4 flex justify-around">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold mb-2">Загрузить видео</h2>
+                    <input
+                        type="file"
+                        name="video"
+                        accept="video/*"
+                        class="block w-full text-sm text-gray-700
+                        rounded-lg
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-lg  file:border-0
+                   file:bg-gray-200 file:text-gray-700
+                   hover:file:bg-gray-300
+                   cursor-pointer focus:outline-none"
+                    />
+                    @error('video')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold mb-2">Аватар для видео</h2>
+                    <input
+                        type="file"
+                        name="video_avatar"
+                        accept="image/*"
+                        class="block rounded-lg  w-full text-sm text-gray-700
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-lg file:border-0
+                   file:bg-gray-200 file:text-gray-700
+                   hover:file:bg-gray-300
+                   cursor-pointer focus:outline-none"
+                    />
+                    @error('video_avatar')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
             <!-- Поле для комментариев -->
             <div class="mb-4">
                 <h2 class="text-xl font-semibold mb-2">Директория для загрузки</h2>
                 <input type="text" name="comment"
                        class="text-md bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4"
-                       placeholder="Директория для загрузки..."/>
+                       placeholder="Директория для загрузки..." value="/" />
                 @error('comment')
                 <p class="text-red-500 text-sm mt-1.5">{{ $message }}</p>
                 @enderror

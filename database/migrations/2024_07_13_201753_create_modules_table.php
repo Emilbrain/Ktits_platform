@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->longText('theory');
             $table->longText('task');
+            $table->string('video_link')->nullable();
+            $table->string('view_avatar')->nullable();
             $table->enum('stat', ['theory', 'practice'])->default('practice');
             $table->enum('status', ['necessarily', 'not necessary'])->default('necessarily');
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();

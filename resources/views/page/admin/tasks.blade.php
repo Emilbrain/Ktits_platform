@@ -22,9 +22,23 @@
                     <p class="text-gray-600">Курс: <span class="text-black font-bold">{{ $task->module->title }}</span>
                     </p>
                 </div>
-                {{--                <p class="text-gray-600">Курс: <a class="text-black font-bold" href="{{ $domain->title }}">{{ $task->module->comment }}</a></p>--}}
+{{--                @foreach($task->ftpFiles as $path)--}}
+{{--                    @php--}}
+{{--                        $name = basename($path);--}}
+{{--                        $url  = route('admin.tasks.download', ['task' => $task->id, 'filename' => $name]);--}}
+{{--                    @endphp--}}
+{{--                    <a--}}
+{{--                        href="{{ $url }}"--}}
+{{--                        class="text-blue-600 hover:text-blue-900 mt-2"--}}
+{{--                    >Скачать {{ $name }}</a><br>--}}
+{{--                @endforeach--}}
+                <a
+                    href=""
+                    class="text-blue-600 hover:text-blue-900 mt-2"
+                >Скачать test </a>
+                                {{--                <p class="text-gray-600">Курс: <a class="text-black font-bold" href="{{ $domain->title }}">{{ $task->module->comment }}</a></p>--}}
                 @if($task->user->subdomains->isNotEmpty())
-                    <a class="text-black font-bold"
+                    <a class="text-black font-bold mt-2"
                        href="{{ $task->user->subdomains->first()->title }}{{ $task->module->comment }}"><span
                             class="text-gray-600">Ссылка: </span> {{ $task->module->comment }}</a>
                 @else

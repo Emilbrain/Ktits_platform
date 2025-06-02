@@ -30,9 +30,11 @@
                         trailWidth: 20,
                         easing: 'easeInOut',
                         duration: 1400,
+
                         text: {
                             autoStyleContainer: false
                         },
+
                         from: { color: '#aaa', width: 20 },
                         to: { color: 'rgb(40,193,85)', width: 20 }, // Изменение цвета линии на #1d4ed8
                         step: function(state, circle) {
@@ -40,16 +42,30 @@
                             circle.path.setAttribute('stroke-width', state.width);
 
                             const value = Math.round(circle.value() * 100);
-                            if (value === 0) {
-                                circle.setText('');
-                            } else if (value === 100) {
-                                circle.setText(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(40,193,85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check" style="width: 100%; height: 100%;"><path d="M20 6L9 17l-5-5"></path></svg>`);
+                            if (value === 100) {
+                                circle.setText(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(40,193,85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check" style="width: 100%; height: 100%;">
+                <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+        `);
+                            } else {
+                                circle.setText(`${value}%`);
                             }
                         }
                     });
 
                     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-                    bar.text.style.fontSize = '1rem';
+                    bar.text.style.fontSize = '0.7rem';
+                    bar.text.style.fontWeight = '600';
+                    bar.text.style.color = '#1F2937'; // тёмно-серый
+                    bar.text.style.position = 'absolute';
+                    bar.text.style.top = '50%';
+                    bar.text.style.left = '50%';
+                    bar.text.style.transform = 'translate(-50%, -50%)';
+                    bar.text.style.margin = '0';
+                    bar.text.style.padding = '0';
+                    textAlign = 'center';
+
 
                     bar.animate(progress / 100);
                 }

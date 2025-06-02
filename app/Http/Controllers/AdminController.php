@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Database;
-use App\Models\FileZilla;
 use App\Models\Group;
 use App\Models\Module;
 use App\Models\Request as RequestModel;
-use App\Models\Subdomain;
 use App\Models\Task;
 use App\Models\TeacherCourseGroup;
+use App\Models\Theory;
+use App\Models\TheorySections;
 use App\Models\User;
 use App\Services\BegetAPIService;
 use App\Services\BegetDatabaseService;
@@ -23,10 +22,11 @@ use App\Services\SubdomainService;
 use App\Services\TelegramService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -124,10 +124,32 @@ class AdminController extends Controller
         $this->groupService = $groupService;
     }
 
-
     public function showMain()
     {
-        return view('page.admin.main');
+
+        $teacher = User::where('role', 'teacher')->get();
+        $teachersCount = count($teacher);
+
+        $student = User::where('role', 'student')->get();
+        $studentsCount = count($student);
+
+        $courses = Course::all();
+        $coursesCount = count($courses);
+
+        $tasks = Task::with('user.group')->get();
+        $tasksByGroup = $tasks->groupBy(fn($task) => $task->user->group->name);
+
+        $raw = Task::selectRaw('status, COUNT(*) as cnt')
+            ->groupBy('status')
+            ->pluck('cnt', 'status')
+            ->toArray();
+
+        $stats = [
+            'completed' => $raw['completed'] ?? 0,
+            'pending' => $raw['pending'] ?? 0,
+            'failed' => $raw['failed'] ?? 0,
+        ];
+        return view('page.admin.main', compact('tasks', 'tasksByGroup', 'stats', 'teachersCount', 'studentsCount', 'coursesCount'));
     }
 
     public function showGenerate()
@@ -150,10 +172,9 @@ class AdminController extends Controller
 
         if ($role === 'student') {
             $createDomain = $this->begetApiService->createSiteAndRetrieveIds($login);
-
             if ($createDomain['status'] === 'success') {
                 $this->fileZillaService->createFileZilla([
-                    'host' => '127.0.0.1',
+                    'host' => 'ktplatform.ru',
                     'username' => $createDomain['ftPLogin'],
                     'password' => $createDomain['ftPPassword'],
                     'user_id' => $userID,
@@ -178,7 +199,6 @@ class AdminController extends Controller
 
         return $this->helperService->returnWithSuccess('admin.generate', 'Пользователь успешно создан.');
     }
-
 
 
     public function showList(Request $request)
@@ -255,6 +275,43 @@ class AdminController extends Controller
         return $this->helperService->returnWithSuccess('admin.courses', 'Курс успешно добавлен');
     }
 
+    public function updateCourse(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        $data = $this->courseService->updateCourse($request, $course);
+
+        if ($request->hasFile('logo')) {
+            $logoPath = $this->helperService->uploadFile($request, 'logo', 'courses/logos');
+            if (!$logoPath) {
+                return $this->helperService->returnBackWithError('Ошибка загрузки файла');
+            }
+
+            if ($course->logo) {
+                Storage::disk('public')->delete($course->logo);
+            }
+
+            $data['logo'] = $logoPath;
+        }
+
+        $course->update($data);
+
+
+        return $this->helperService->returnWithSuccess('admin.courses', 'Курс успешно обновлён');
+    }
+
+    public function deleteCourse($id)
+    {
+        $course = Course::findOrFail($id);
+
+        $title = $course->title;
+
+        $course->delete();
+
+//        $this->telegramService->sendMessageToUsername($this->userService->getTelegramUsername(), 'ADMIN: ' . "группа " . $title . " удалена");
+
+        return $this->helperService->returnWithSuccess('admin.courses', 'Курс ' . $title .' успешно удалена');
+    }
+
     public function showAddGroup()
     {
         return view('page.admin.add-group');
@@ -311,7 +368,6 @@ class AdminController extends Controller
     public function storeModule(Request $request)
     {
         $data = $this->moduleService->createModule($request);
-
         Module::create($data);
 
         $courseId = $data['course_id'];
@@ -376,10 +432,49 @@ class AdminController extends Controller
 
     public function showTasks()
     {
-        $tasks = Task::orderByRaw("FIELD(status, 'pending', 'failed', 'completed')")->paginate(10);
+        $tasks = Task::orderByRaw("FIELD(status, 'pending', 'failed', 'completed')")
+            ->with(['user.filezilla', 'module'])
+            ->paginate(10);
 
+//        // 2) Пробегаем по каждой задаче и для неё собираем список файлов
+//        foreach ($tasks as $task) {
+//            $ftpConfig = optional($task->user->filezilla);
+//
+//            // Если у пользователя нет FTP-учётки — пропускаем
+//            if (! $ftpConfig) {
+//                $task->ftpFiles = [];
+//                continue;
+//            }
+//
+//            // 3) Динамически настраиваем диск student_ftp
+//            Config::set('filesystems.disks.student_ftp', [
+//                'driver'   => 'ftp',
+//                'host'     => $ftpConfig->host,
+//                'username' => $ftpConfig->username,
+//                'password' => $ftpConfig->password,
+//                // если FTP-юзер сразу попадает в public_html/{login}, можно оставить пустым:
+//                'root'     => '',
+//                'passive'  => true,
+//                'timeout'  => 30,
+//            ]);
+//
+//            $disk = Storage::disk('student_ftp');
+//
+//            // 4) Папка на FTP определяем по полю comment в модуле
+//            $folder = trim($task->module->comment ?: '', '/');
+//
+//            // 5) Если папка есть — получаем файлы, иначе пустой массив
+//            if ($folder && $disk->exists($folder)) {
+//                $task->ftpFiles = $disk->files($folder);
+//            } else {
+//                $task->ftpFiles = [];
+//            }
+//        }
+
+        // 6) Передаём в представление
         return view('page.admin.tasks', compact('tasks'));
     }
+
 
     public function showTeachers()
     {
@@ -455,6 +550,59 @@ class AdminController extends Controller
         }
     }
 
+    public function showTheory()
+    {
+        $theories = Theory::all();
+        return view('page.admin.theory', compact('theories'));
+    }
+
+    public function showAddTheoryModule()
+    {
+        return view('page.admin.add-theory-module');
+    }
+
+    public function showTheoryModule($id)
+    {
+        $theory = TheorySections::where('theory_id', $id)->get();
+        return view('page.admin.modules', compact('theory'), compact('id'));
+    }
+
+    public function addTheoryModule(Request $request){
+        $data = $request->validate([
+            'title' => 'required|string|max:255|unique:theories,title',
+            'logo' => 'nullable|image|max:2048', // опционально, до 2 МБ
+        ], [
+            'title.required' => 'Название обязательно',
+            'title.unique' => 'Модуль с таким названием уже существует',
+            'logo.image'    => 'Файл должен быть изображением',
+            'logo.max'      => 'Максимальный размер изображения — 2 МБ',
+        ]);
+
+        if ($request->hasFile('logo')) {
+            // по умолчанию диск "local" → storage/app
+            $path = $request->file('logo')->store('theory_modules');
+
+            // $path теперь строка вида "theory_modules/имя_файла.png"
+            $data['logo'] = $path;
+        }
+        Theory::create($data);
+
+        // 4) Редирект со сообщением об успехе
+        return redirect()
+            ->route('admin.show.module.theory.add')
+            ->with('success', 'Модуль теории успешно создан');
+    }
+
+    public function showAddTheorySection($id)
+    {
+        return view('page.admin.add-theory_section', compact('id'));
+    }
+
+    public function showGlavTheory($id){
+        $theory = TheorySections::FindOrFail($id);
+        return view('page.admin.glav', compact('theory'));
+    }
+
     public function setting()
     {
         return view('page.admin.setting');
@@ -465,10 +613,70 @@ class AdminController extends Controller
         $userId = auth()->id();
         $this->telegramService->updateTelegramUsers();
         $isUpdate = $this->userService->updateTelegramUserName($request, $userId);
-        if($isUpdate){
+        if ($isUpdate) {
             $this->helperService->returnWithSuccess('admin.setting', 'Ник успешно обновлен.');
-        }else{
+        } else {
             $this->helperService->returnBackWithError('Не удалось обновить ник;');
         }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], [
+            'current_password.required' => 'Введите текущий пароль',
+            'new_password.required' => 'Введите новый пароль',
+            'new_password.min' => 'Пароль должен быть не менее 6 символов',
+            'new_password.confirmed' => 'Подтверждение пароля не совпадает',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Текущий пароль указан неверно'])->withInput();
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->pp = $request->new_password;
+        $user->save();
+
+        return back()->with('success', 'Пароль успешно обновлён');
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        // 1) Валидация
+        $request->validate([
+            'logo' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // 2) Удаляем старый, если есть
+        if ($user->logo) {
+            $old = public_path($user->logo);
+            if (file_exists($old)) {
+                unlink($old);
+            }
+        }
+
+        // 3) Папка public/avatar
+        $avatarDir = public_path('logo');
+        if (!is_dir($avatarDir)) {
+            mkdir($avatarDir, 0755, true);
+        }
+
+        // 4) Сохраняем новый файл
+        $path = $request
+            ->file('logo')
+            ->store('avatars', 'public');
+
+        // 5) Сохраняем в БД относительный путь
+        $user->logo =  $path;
+        $user->save();
+
+        return back()->with('success', 'Аватар обновлён!');
     }
 }

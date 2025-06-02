@@ -10,7 +10,7 @@
                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Имя</label>
                 <input type="text" id="username" value="{{ old('username') }}" name="username"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Иванов"/>
+                       placeholder="Иван"/>
                 @error('username')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -19,7 +19,7 @@
                 <label for="surname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Фамилия</label>
                 <input type="text" id="surname" value="{{ old('surname') }}" name="surname"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Иван"/>
+                       placeholder="Иванов"/>
                 @error('surname')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -46,7 +46,7 @@
                 </div>
                 <div class="flex items-center">
                     <input id="role-teacher" type="radio" name="role" value="teacher" {{ old('role') == 'teacher' ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="role-teacher" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Учитель</label>
+                    <label for="role-teacher" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Преподаватель</label>
                 </div>
                 @error('role')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>

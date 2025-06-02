@@ -14,6 +14,8 @@ class Module extends Model
         'comment',
         'theory',
         'task',
+        'video_link',
+        'video_avatar',
         'stat',
         'status',
         'course_id',

@@ -29,7 +29,7 @@ class BegetAPIService
             'input_format' => 'json',
             'output_format' => 'json',
             'input_data' => json_encode([
-                'name' => $name . '.kplatforma.ru'
+                'name' => $name . '.ktplatform.ru'
             ]),
         ];
 
@@ -184,7 +184,7 @@ class BegetAPIService
      */
     public function findSiteIdByName($sites, $name)
     {
-        $fullName = $name . '.kplatforma.ru';
+        $fullName = $name . '.ktplatform.ru';
 
         foreach ($sites as $site) {
             if ($site['path'] === "{$fullName}/public_html") {
@@ -206,7 +206,7 @@ class BegetAPIService
      */
     public function findSubdomainIdByName($subdomains, $name)
     {
-        $fullName = $name . '.kplatforma.ru';
+        $fullName = $name . '.ktplatform.ru';
 
         foreach ($subdomains as $subdomain) {
             if (isset($subdomain['fqdn']) && $subdomain['fqdn'] === $fullName) {
@@ -283,7 +283,7 @@ class BegetAPIService
 
         return [
             'status' => 'success',
-            'link' => 'http://' . $name . '.kplatforma.ru/',
+            'link' => 'http://' . $name . '.ktplatform.ru',
             'ftPLogin' => $createFtpAccount['login'],
             'ftPPassword' => $createFtpAccount['password'],
             'dbLogin' => $createDataBase['login'],
@@ -306,7 +306,7 @@ class BegetAPIService
             ];
         }
 
-        $homedir =  '/' . $suffix .'.kplatforma.ru/public_html';
+        $homedir =  '/' . $suffix .'.ktplatform.ru/public_html';
 
         $apiUrl = 'https://api.beget.com/api/ftp/add';
         $password = Str::random(10);
@@ -359,7 +359,7 @@ class BegetAPIService
         $apiUrl = 'https://api.beget.com/api/mysql/addDb';
 
         $login = $name;
-        $password = Str::random(8);
+        $password = Str::password(14, symbols: true);
 
         $params = [
             'login' => $this->apiLogin,
@@ -373,17 +373,18 @@ class BegetAPIService
         ];
 
         $response = Http::get($apiUrl, $params);
+        $data = $response->json();
 
-        if ($response->ok()) {
+        if ($data['status'] === 'success') {
             return [
                 'status' => 'success',
-                'login' => 'k1z1nksb_' . $login,
+                'login' => 'emilbrain_' . $login,
                 'password' => $password
             ];
         } else {
             return [
                 'status' => 'error',
-                'error_text' => 'Ошибка при подключении к API Beget.',
+                'error_text' => 'Beget API error: ' . json_encode($data)
             ];
         }
     }

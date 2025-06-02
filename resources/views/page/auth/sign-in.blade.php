@@ -4,7 +4,11 @@
     <img src="{{ asset('images/xloading.gif') }}" alt="" class="absolute mt-[-300px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     <div class="fixed inset-0 flex items-center justify-center">
         <div id="loginForm" class="bg-white p-8 rounded-lg shadow-lg w-1/3">
-            <h2 class="text-2xl font-bold mb-6">Авторизация</h2>
+            <div class="flex items-center justify-center gap-8">
+                <img src="{{asset('images/cklogo.png')}}" class="w-36" alt="">
+                <img src="{{asset('images/ktitslogo.png')}}" class="w-36" alt="">
+            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center mt-3">Авторизация</h2>
             <form method="POST" action="{{ route('login.store') }}">
                 @csrf
                 <div class="mb-4">

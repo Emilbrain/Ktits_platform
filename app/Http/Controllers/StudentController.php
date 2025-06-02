@@ -7,6 +7,8 @@ use App\Models\Course;
 use App\Models\Module;
 use App\Models\Request as RequestModel;
 use App\Models\Task;
+use App\Models\Theory;
+use App\Models\TheorySections;
 use App\Services\CourseService;
 use App\Services\HelperService;
 use App\Services\ModuleService;
@@ -15,6 +17,7 @@ use App\Services\TelegramService;
 use App\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -157,18 +160,86 @@ class StudentController extends Controller
         }
     }
 
-    public function showTheory()
+    public function updatePassword(Request $request)
     {
-        return view('page.student.theory');
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], [
+            'current_password.required' => 'Введите текущий пароль',
+            'new_password.required' => 'Введите новый пароль',
+            'new_password.min' => 'Пароль должен быть не менее 6 символов',
+            'new_password.confirmed' => 'Подтверждение пароля не совпадает',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Текущий пароль указан неверно'])->withInput();
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->pp = $request->new_password;
+        $user->save();
+
+        return back()->with('success', 'Пароль успешно обновлён');
     }
 
-    public function showModules()
+
+    public function showTheory()
     {
-        return view('page.student.modules');
+        $theories = Theory::all();
+        return view('page.student.theory', compact('theories'));
+    }
+
+    public function showModules($id)
+    {
+        $theory = TheorySections::where('theory_id', $id)->get();
+        return view('page.student.modules', compact('theory'));
+    }
+
+    public function showGlav($id){
+        $theory = TheorySections::FindOrFail($id);
+        return view('page.student.glav', compact('theory'));
     }
     public function showOneModules()
     {
         return view('page.student.one-module');
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        // 1) Валидация
+        $request->validate([
+            'logo' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // 2) Удаляем старый, если есть
+        if ($user->logo) {
+            $old = public_path($user->logo);
+            if (file_exists($old)) {
+                unlink($old);
+            }
+        }
+
+        // 3) Папка public/avatar
+        $avatarDir = public_path('logo');
+        if (!is_dir($avatarDir)) {
+            mkdir($avatarDir, 0755, true);
+        }
+
+        // 4) Сохраняем новый файл
+        $path = $request
+            ->file('logo')
+            ->store('avatars', 'public');
+
+        // 5) Сохраняем в БД относительный путь
+        $user->logo =  $path;
+        $user->save();
+
+        return back()->with('success', 'Аватар обновлён!');
     }
 }
 

@@ -1,7 +1,38 @@
 @extends('includes.layout')
 @section('h2-name', 'Модуль: ' . $module->title)
 @section('content')
-    <div class="flex w-full items-center mb-6">
+    @if(!empty($module->video_link))
+        <div class="mb-6">
+            <video
+                id="my-video"
+                class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid"
+                controls
+                preload="auto"
+                {{-- Используем сохранённый в БД аватар как постер --}}
+                poster="{{ asset('storage/' . $module->video_avatar) }}"
+            >
+                {{-- И сам видеоролик из БД --}}
+                <source src="{{ asset('storage/' . $module->video_link) }}" type="video/mp4" />
+                <p class="vjs-no-js">
+                    Чтобы посмотреть видео, включите JavaScript в вашем браузере.
+                </p>
+            </video>
+        </div>
+
+        {{-- Подключаем Video.js --}}
+        <link href="https://vjs.zencdn.net/8.11.0/video-js.css" rel="stylesheet" />
+        <script src="https://vjs.zencdn.net/8.11.0/video.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                videojs('my-video', {
+                    fluid: true,
+                    aspectRatio: '16:9'
+                });
+            });
+        </script>
+    @endif
+
+    <div class="flex w-full items-center mb-6 mt-4">
         <h2 class="text-xl ml-5 font-bold flex-shrink-0">Директория для загрузки</h2>
         @if(isset($module->comment))
             <div class="rounded-xl bg-white p-2 w-full ml-5">
@@ -9,6 +40,7 @@
             </div>
         @endif
     </div>
+
     @if(isset($task) && count($comments)>0)
         <h2 class="text-xl ml-5 font-bold flex-shrink-0 mb-3">Комментарии</h2>
         <div class="flex flex-col p-6 bg-white mb-10 rounded-xl">
@@ -83,7 +115,47 @@
             </div>
         </div>
     </div>
-    <div class="flex items-center">
+    <h2 class="text-xl ml-5 font-bold flex-shrink-0 mb-3">Загрузка работ</h2>
+
+    <form
+        action="{{ route('student.module.upload', $module->id) }}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="bg-white rounded-xl shadow-sm p-6
+           flex flex-col md:flex-row
+           items-center
+           justify-between
+           space-y-4 md:space-y-0 md:space-x-4"
+    >
+        @csrf
+
+        <!-- Поле загрузки -->
+        <input
+            id="solution"
+            name="solution"
+            type="file"
+            class="block w-auto text-sm text-gray-700
+               file:mr-4 file:py-2 file:px-4 rounded-lg
+               file:rounded-lg file:border-0
+               file:bg-gray-200 file:text-gray-700
+               hover:file:bg-gray-300
+               cursor-pointer focus:outline-none"
+        >
+
+        <!-- Кнопка отправки -->
+        <button
+            type="submit"
+            class="flex-none px-6 py-2
+               bg-blue-600 text-white font-medium rounded-lg
+               hover:bg-blue-700 focus:ring-2 focus:ring-blue-300"
+        >
+            Отправить решение
+        </button>
+    </form>
+    @error('solution')
+    {{$message}}
+    @enderror
+    <div class="flex items-center mt-10">
         @if(!isset($task) || $task->status === 'failed')
             <form action="{{ route('student.task.create', $module->id) }}" method="post">
                 @csrf
@@ -95,14 +167,12 @@
         @if(isset($task))
             <div class="
             @if($task->formatted_status === 'В ожидании проверки')
-            bg-yellow-100
-                                text-black
+                bg-yellow-100 text-black
              @elseif($task->formatted_status === 'Выполнено')
-             bg-green-500 text-white
+             bg-green-500 text-black
               @elseif($task->formatted_status === 'Ошибка выполнения')
               bg-red-500 text-white
-              @endif
-            bg-yellow-50 rounded-lg py-2 px-4 text-yellow-800">
+              @endif rounded-lg py-2 px-4">
                 {{ $task->formatted_status }}
             </div>
         @endif

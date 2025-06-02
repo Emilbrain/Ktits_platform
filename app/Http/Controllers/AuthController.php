@@ -18,6 +18,10 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
+    public function showMain(){
+        return view('page.index');
+    }
+
     public function showIndex(){
         return view('page.training-system');
     }
@@ -32,6 +36,7 @@ class AuthController extends Controller
     {
         return view('page.auth.sign-in');
     }
+
 
     public function login(Request $request)
     {

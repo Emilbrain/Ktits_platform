@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->belongsTo(Group::class);
     }
 
+    public function filezilla()
+    {
+        return $this->hasOne(FileZilla::class);
+    }
+
     public function requests()
     {
         return $this->hasMany(Request::class);

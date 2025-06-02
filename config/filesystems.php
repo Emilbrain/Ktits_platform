@@ -56,6 +56,16 @@ return [
             'throw' => false,
         ],
 
+
+        'student_ftp' => [
+            'driver'   => 'ftp',
+            'host'     => '…',
+            'username' => '…',
+            'password' => '…',
+            'root'     => '/public_html/…',
+            'passive'  => true,
+            'timeout'  => 30,
+        ],
     ],
 
     /*

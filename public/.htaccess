@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+     Header set Accept-Ranges bytes
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

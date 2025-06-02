@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Module;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ModuleService
@@ -21,14 +22,51 @@ class ModuleService
     public function createModule($request)
     {
         $data = $this->validateModule($request);
+
         $data['slug'] = Str::slug($request->input('title'));
+
+        if ($request->hasFile('video')) {
+            $data['video_link'] = $request
+                ->file('video')
+                ->store('video', 'public');
+        }
+
+        // 4) Загрузка аватара видео в storage/app/
+        if ($request->hasFile('video_avatar')) {
+            $data['video_avatar'] = $request
+                ->file('video_avatar')
+                ->store('video_avatar', 'public');
+        }
+
         return $data;
     }
 
     public function updateModule($request, int $id)
     {
+        $module = Module::findOrFail($id);
+
         $data = $this->validateModule($request, $id);
+
         $data['slug'] = Str::slug($request->input('title'));
+
+        if ($request->hasFile('video')) {
+            if ($module->video_link) {
+                Storage::disk('public')->delete($module->video_link);
+            }
+            $data['video_link'] = $request
+                ->file('video')
+                ->store('video', 'public');
+        }
+
+        if ($request->hasFile('video_avatar')) {
+            if ($module->video_avatar) {
+                Storage::disk('public')->delete($module->video_avatar);
+            }
+            $data['video_avatar'] = $request
+                ->file('video_avatar')
+                ->store('video_avatar', 'public');
+        }
+
         return $data;
     }
 
@@ -46,6 +84,8 @@ class ModuleService
             'stat' => 'required|in:theory,practice',
             'status' => 'required|in:necessarily,not necessary',
             'course_id' => 'required|exists:courses,id',
+            'video' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:51200',
+            'video_avatar'  => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:10240',
         ],
             [
                 'title.required' => 'Поле "Название" обязательно для заполнения.',
@@ -60,6 +100,11 @@ class ModuleService
                 'status.in' => 'Поле "Статус" должно быть одним из следующих: necessarily, not necessary.',
                 'course_id.required' => 'Поле "Курс" обязательно для заполнения.',
                 'course_id.exists' => 'Выбранный курс не существует.',
+                'video.mimes'           => 'Видео должно быть в формате MP4, MOV, AVI или WMV.',
+                'video.max'             => 'Максимальный размер видео — 50 МБ.',
+                'video_avatar.image' => 'Аватар видео должен быть изображением.',
+                'video_avatar.mimes' => 'Аватар видео: JPG, JPEG, PNG, GIF или SVG.',
+                'video_avatar.max'   => 'Максимальный размер аватара — 10 МБ.',
             ]);
     }
 }

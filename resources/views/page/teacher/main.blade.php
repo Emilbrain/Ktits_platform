@@ -13,13 +13,12 @@
                             <h4 class="text-md">{{$course->course->title}}</h4>
                         </a>
                     @empty
-                        <h2 class="col-span-4"> Вы не видете не один курс </h2>
+                        <h2 class="col-span-4"> Вы не ведёте не один курс </h2>
 
                     @endforelse
 
                 </div>
                 <h3 class="mb-3 text-lg mt-5 ml-2 font-bold">Доступные для проверки</h3>
-                <div class="bg-gray-100 flex flex-col gap-5 rounded-xl">
                     <div class="flex flex-col">
                         @forelse($tasks as $task)
                             @if(count($task->comments)>0)
@@ -39,10 +38,12 @@
                                 <div class="flex flex-col">
                                     <div class="flex gap-2 flex-col">
                                         <span class="font-bold">{{ $task->user->username }} {{ $task->user->surname }} {{$task->user->group->title}}</span>
-                                        <p class="text-gray-600">Курс: <span class="text-black font-bold">{{ $task->module->title }}</span>
+                                        <p class="text-gray-600">Курс: <span class="text-black font-bold">{{ $task->module->course->title }}</span>
                                         </p>
                                     </div>
-                                    {{--                <p class="text-gray-600">Курс: <a class="text-black font-bold" href="{{ $domain->title }}">{{ $task->module->comment }}</a></p>--}}
+                                    <div class="flex gap-2 flex-col">
+                                        <p class="text-gray-600">Модуль: <span class="text-black font-bold">{{ $task->module->title}}</span></p>
+                                    </div>
                                     @if($task->user->subdomains->isNotEmpty())
                                         <a class="text-black font-bold"
                                            href="{{ $task->user->subdomains->first()->title }}{{ $task->module->comment }}"><span
@@ -72,8 +73,8 @@
 
 
                         @empty
-                            <h2>
-                                Нет заданий для  проверки
+                            <h2 class="text-lg font-semibold text-gray-700 my-6">
+                                Нет заданий для проверки
                             </h2>
                         @endforelse
                         <div class="mt-4">
@@ -81,66 +82,49 @@
                         </div>
 
                     </div>
-                </div>
 
             </div>
 
-    <script>
-        const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
+{{--    <script>--}}
+{{--        const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');--}}
 
-        sideLinks.forEach(item => {
-            const li = item.parentElement;
-            item.addEventListener('click', () => {
-                sideLinks.forEach(i => {
-                    i.parentElement.classList.remove('active');
-                })
-                li.classList.add('active');
-            })
-        });
+{{--        sideLinks.forEach(item => {--}}
+{{--            const li = item.parentElement;--}}
+{{--            item.addEventListener('click', () => {--}}
+{{--                sideLinks.forEach(i => {--}}
+{{--                    i.parentElement.classList.remove('active');--}}
+{{--                })--}}
+{{--                li.classList.add('active');--}}
+{{--            })--}}
+{{--        });--}}
 
-        const menuBar = document.querySelector('.content nav .bx.bx-menu');
-        const sideBar = document.querySelector('.sidebar');
+{{--        const menuBar = document.querySelector('.content nav .bx.bx-menu');--}}
+{{--        const sideBar = document.querySelector('.sidebar');--}}
 
-        menuBar.addEventListener('click', () => {
-            sideBar.classList.toggle('close');
-        });
+{{--        menuBar.addEventListener('click', () => {--}}
+{{--            sideBar.classList.toggle('close');--}}
+{{--        });--}}
 
-        const searchBtn = document.querySelector('.content nav form .form-input button');
-        const searchBtnIcon = document.querySelector('.content nav form .form-input button .bx');
-        const searchForm = document.querySelector('.content nav form');
+{{--        window.addEventListener('resize', () => {--}}
+{{--            if (window.innerWidth < 768) {--}}
+{{--                sideBar.classList.add('close');--}}
+{{--            } else {--}}
+{{--                sideBar.classList.remove('close');--}}
+{{--            }--}}
+{{--            if (window.innerWidth > 576) {--}}
+{{--                searchBtnIcon.classList.replace('bx-x', 'bx-search');--}}
+{{--                searchForm.classList.remove('show');--}}
+{{--            }--}}
+{{--        });--}}
 
-        searchBtn.addEventListener('click', function (e) {
-            if (window.innerWidth < 576) {
-                e.preventDefault;
-                searchForm.classList.toggle('show');
-                if (searchForm.classList.contains('show')) {
-                    searchBtnIcon.classList.replace('bx-search', 'bx-x');
-                } else {
-                    searchBtnIcon.classList.replace('bx-x', 'bx-search');
-                }
-            }
-        });
+{{--        const toggler = document.getElementById('theme-toggle');--}}
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth < 768) {
-                sideBar.classList.add('close');
-            } else {
-                sideBar.classList.remove('close');
-            }
-            if (window.innerWidth > 576) {
-                searchBtnIcon.classList.replace('bx-x', 'bx-search');
-                searchForm.classList.remove('show');
-            }
-        });
-
-        const toggler = document.getElementById('theme-toggle');
-
-        toggler.addEventListener('change', function () {
-            if (this.checked) {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark');
-            }
-        });
-    </script>
+{{--        toggler.addEventListener('change', function () {--}}
+{{--            if (this.checked) {--}}
+{{--                document.body.classList.add('dark');--}}
+{{--            } else {--}}
+{{--                document.body.classList.remove('dark');--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection

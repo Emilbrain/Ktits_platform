@@ -14,6 +14,9 @@ use App\Services\ModuleService;
 use App\Services\TelegramService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class TeacherController extends Controller
 {
@@ -36,10 +39,16 @@ class TeacherController extends Controller
 
     public function showMain()
     {
-        $courses = TeacherCourseGroup::with('course')->where('teacher_id', auth()->user()->id)->get();
-        $tasks = Task::whereHas('module.course.TeacherCourseGroup', function ($query) {
-            $query->where('teacher_id', auth()->id());
-        })->paginate(10);
+        $courses = TeacherCourseGroup::with('course')
+            ->where('teacher_id', auth()->id())
+            ->get()
+            ->unique('course')
+            ->values();
+        $tasks = Task::whereIn('status', ['pending', 'failed', 'not completed'])
+            ->whereHas('module.course.TeacherCourseGroup', function ($query) {
+                $query->where('teacher_id', auth()->id());
+            })
+            ->paginate(10);
 
         return view('page.teacher.main', compact('courses', 'tasks'));
     }
@@ -55,9 +64,14 @@ class TeacherController extends Controller
 
     public function showOneGroup($id)
     {
-        $user = User::where('group_id', $id)->first();
         $group = Group::FindOrFail($id);
-        return view('page.teacher.one-group', compact('user', 'group'));
+        $tasks = Task::whereHas('module.course.teacherCourseGroup', function ($query) use ($id) {
+            $query->where('teacher_id', auth()->id())
+                ->where('group_id', $id);
+        })->whereHas('user', function ($query) use ($id) {
+            $query->where('group_id', $id);
+        })->with(['module', 'user'])->paginate(10);
+        return view('page.teacher.one-group', compact(  'group', 'tasks'));
     }
 
     public function showRequest()
@@ -75,6 +89,31 @@ class TeacherController extends Controller
         }else{
             $this->helperService->returnBackWithError('Не удалось обновить ник;');
         }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], [
+            'current_password.required' => 'Введите текущий пароль',
+            'new_password.required' => 'Введите новый пароль',
+            'new_password.min' => 'Пароль должен быть не менее 6 символов',
+            'new_password.confirmed' => 'Подтверждение пароля не совпадает',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Текущий пароль указан неверно'])->withInput();
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->pp = $request->new_password;
+        $user->save();
+
+        return back()->with('success', 'Пароль успешно обновлён');
     }
 
     public function showCourses()
@@ -134,6 +173,41 @@ class TeacherController extends Controller
         $module->delete();
 
         return $this->helperService->returnWithSuccess('teacher.show.course', 'Модуль успешно удален', $courseId);
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        // 1) Валидация
+        $request->validate([
+            'logo' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // 2) Удаляем старый, если есть
+        if ($user->logo) {
+            $old = public_path($user->logo);
+            if (file_exists($old)) {
+                unlink($old);
+            }
+        }
+
+        // 3) Папка public/avatar
+        $avatarDir = public_path('logo');
+        if (!is_dir($avatarDir)) {
+            mkdir($avatarDir, 0755, true);
+        }
+
+        // 4) Сохраняем новый файл
+        $path = $request
+            ->file('logo')
+            ->store('avatars', 'public');
+
+        // 5) Сохраняем в БД относительный путь
+        $user->logo =  $path;
+        $user->save();
+
+        return back()->with('success', 'Аватар обновлён!');
     }
 
 }
