@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex gap-5">
         <form class="max-w-lg mb-5" method="GET" action="{{ route('admin.list') }}">
-            <div class="flex">
+            <div class="flex flex-col sm:flex-row">
                 <!-- Dropdown Button for Categories -->
                 <button id="dropdown-button" data-dropdown-toggle="dropdown"
                         class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
@@ -99,41 +99,34 @@
         @endif
 
         <!-- Table for displaying the found records -->
-        <table class="min-w-full rounded-xl bg-white">
-            <thead>
-            <tr>
-                <th class="py-2 px-4 border-b">Имя</th>
-                <th class="py-2 px-4 border-b">Фамилия</th>
-                <th class="py-2 px-4 border-b">Отчество</th>
-                <th class="py-2 px-4 border-b">Группа</th>
-                <th class="py-2 px-4 border-b">Логин и пароль</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($list as $student)
+        <div class="overflow-x-auto">
+            <table class="min-w-full rounded-xl bg-white text-sm">
+                <thead>
                 <tr>
-                    <td class="py-2 px-4 border-b text-center">{{ $student->username }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ $student->surname }}</td>
-                    <td class="py-2 px-4 border-b text-center">{{ $student->patronymic }}</td>
-                    <td class="py-2 px-4 border-b text-center">
-                        @if($student->group_id)
-                            {{ $student->group->title }}
-                        @else
-                            Нет группы
-                        @endif
-                    </td>
-                    <td class="py-2 px-4 border-b">
-                        <div class="flex items-center justify-center">
-                            <button class="copy-btn" data-login="{{ $student->login }}"
-                                    data-password="{{ $student->pp }}">
+                    <th class="py-2 px-4 border-b">Имя</th>
+                    <th class="py-2 px-4 border-b">Фамилия</th>
+                    <th class="py-2 px-4 border-b">Отчество</th>
+                    <th class="py-2 px-4 border-b">Группа</th>
+                    <th class="py-2 px-4 border-b">Логин и пароль</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($list as $student)
+                    <tr>
+                        <td class="py-2 px-4 border-b text-center">{{ $student->username }}</td>
+                        <td class="py-2 px-4 border-b text-center">{{ $student->surname }}</td>
+                        <td class="py-2 px-4 border-b text-center">{{ $student->patronymic }}</td>
+                        <td class="px-6 py-4">{{ $student->group->title ?? 'Нет группы' }}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button class="copy-btn" data-login="{{ $student->login }}" data-password="{{ $student->pp }}">
                                 <i class='bx bx-copy'></i>
                             </button>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
         <div class="mt-4 flex justify-center gap-5">
             {{ $list->appends(request()->input())->links() }}
         </div>

@@ -348,153 +348,146 @@
             </a>
         </nav>
     @endauth
-    <main class="flex gap-5">
-        <div class="w-3/4 gap-5">
-            @include('includes.message')
-            @yield('content')
-        </div>
-        @adminArea
-        <div class="w-1/4 gap-y-5 flex flex-col">
-            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                @if(auth()->user()->logo)
-                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                @else
-                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                @endif
-                <h3 class="mb-2">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                <p><span class="text-[#677483]">Администратор</span></p>
+        <main class="flex flex-col lg:flex-row gap-5">
+            <div class="w-full lg:w-3/4 gap-5">
+                @include('includes.message')
+                @yield('content')
             </div>
-        </div>
-        @endadminArea
-        @studentArea
-        <div class="w-1/4 gap-y-5 flex flex-col">
-            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                @if(auth()->user()->logo)
-                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                @else
-                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                @endif
-                <h3 class="mb-2">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                <p><span class="text-[#677483]">Студент группы: </span>{{ auth()->user()->group->title }}</p>
-            </div>
-            <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center">
-                                <h3 class="text-xl font-bold text-gray-800">Данные личного домена</h3>
-                <div class="w-full">
-                    <div class="mt-2">
 
-                        <p class=""><span class="text-[#677483]">Ссылка на сайт: </span><a href="http://{{ auth()->user()->login }}.{{ $fileZilla->host }}">{{ auth()->user()->login }}.{{ $fileZilla->host }}</a></p>
+            @adminArea
+            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                    @if(auth()->user()->logo)
+                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                    @endif
+                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
+                    <p><span class="text-[#677483]">Администратор</span></p>
+                </div>
+            </div>
+            @endadminArea
+
+            @studentArea
+            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                    @if(auth()->user()->logo)
+                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                    @endif
+                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
+                    <p class="text-center"><span class="text-[#677483]">Студент группы: </span>{{ auth()->user()->group->title }}</p>
+                </div>
+
+                <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center text-sm">
+                    <h3 class="text-xl font-bold text-gray-800 text-center">Данные личного домена</h3>
+                    <div class="w-full">
+                        <p><span class="text-[#677483]">Ссылка на сайт: </span>
+                            <a href="http://{{ auth()->user()->login }}.{{ $fileZilla->host }}">{{ auth()->user()->login }}.{{ $fileZilla->host }}</a>
+                        </p>
+                    </div>
+                    <div class="w-full">
+                        <p class="text-md font-semibold">Подключение для FileZilla</p>
+                        <div class="mt-2 space-y-2">
+                            <p class="flex items-center"><span class="text-[#677483]">Хост: </span>
+                                <span class="ml-1 copy-text">{{ $fileZilla->host }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                            <p class="flex items-center"><span class="text-[#677483]">Имя пользователя: </span>
+                                <span class="ml-1 copy-text">{{ $fileZilla->username }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                                <span class="ml-1 copy-text">{{ $fileZilla->password }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <p class="text-md font-semibold">Подключение для phpMyAdmin</p>
+                        <div class="mt-2 space-y-2">
+                            <p><a href="https://argent.beget.com/phpMyAdmin">Ссылка</a></p>
+                            <p class="flex items-center"><span class="text-[#677483]">Имя пользователя: </span>
+                                <span class="ml-1 copy-text">{{ $database->username }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                                <span class="ml-1 copy-text">{{ $database->password }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <p class="text-md font-semibold">Данные для платформы</p>
+                        <div class="mt-2 space-y-2">
+                            <p class="flex items-center"><span class="text-[#677483]">Логин: </span>
+                                <span class="ml-1 copy-text">{{ auth()->user()->login }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                                <span class="ml-1 copy-text">{{ auth()->user()->pp }}</span>
+                                <button class="ml-2 copy-btn" title="Копировать">
+                                    <i class='bx bx-copy text-lg text-gray-500'></i>
+                                </button>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="w-full">
-                    <p class="text-md">Подключение для FileZilla</p>
-                    <div class="mt-2">
-                        <p class="flex items-center"><span class="text-[#677483]">Хост: </span>
-                            <span class="copy-text">{{ $fileZilla->host }} </span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                        <p class="flex items-center">
-                            <span class="text-[#677483]">Имя пользователя: </span>
-                            <span class="copy-text">{{ $fileZilla->username  }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                        <p class="flex items-center">
-                        <span class="text-[#677483]">Пароль: </span>
-                            <span class="copy-text">{{ $fileZilla->password }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-
-
-                    </div>
-                </div>
-                <div class="w-full">
-                    <p class="text-md">Подключение для phpMyAdmin</p>
-                    <div class="mt-2">
-                        <p class=""><span class="text-[#677483]"></span><a
-                                href="https://argent.beget.com/phpMyAdmin">Ссылка</a></p>
-                        <p class="flex items-center">
-                            <span class="text-[#677483]">Имя пользователя: </span>
-                            <span class="copy-text">{{ $database->username }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                        <p class="flex items-center">
-                            <span class="text-[#677483]">Пароль: </span>
-                            <span class="copy-text">{{ $database->password }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                    </div>
-                </div>
-                <div class="w-full">
-                    <p class="text-md">Данные для платформы</p>
-                    <div class="mt-2">
-                        <p class="flex items-center">
-                        <span class="text-[#677483]">Логин: </span>
-                            <span class="copy-text">{{ auth()->user()->login }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                        <p class="flex items-center">
-                        <span class="text-[#677483]">Пароль: </span>
-                            <span class="copy-text">{{ auth()->user()->pp }}</span>
-                            <button type="button" class="copy-btn ml-2 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition" title="Копировать">
-                                <i class='bx bx-copy text-xl text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'></i>
-                            </button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center">
-                <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
-                <div class="grid w-full gap-3">
-                    <a href="{{ auth()->user()->group->link }}"
-                       class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                        <p class="text-[16px]"><span
-                                class="text-[16px] mb-1 text-[#677483]">Группа</span><br>{{ auth()->user()->group->title }}
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        @endstudentArea
-        @teacherArea
-        <div class="w-1/4 gap-y-5 flex flex-col">
-            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                @if(auth()->user()->logo)
-                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                @else
-                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                @endif
-                <h3 class="mb-2">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                <p><span class="text-[#677483]">Преподаватель</span></p>
-            </div>
-            <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center">
                 <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center">
                     <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
-                    <div class="grid grid-cols-2 w-full gap-3">
-                        @forelse($groups as $group)
-                            <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                                <a href="{{route('teacher.one.group', $group->group->id)}}" class="text-md"><p class="text-[14px] mb-1">Группа</p>{{$group->group->title}}</a>
-                            </div>
-                        @empty
-                            <h2 class="col-span-4">Нет ни одной группы в списке </h2>
-                        @endforelse
+                    <div class="grid w-full gap-3">
+                        <a href="{{ auth()->user()->group->link }}" class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
+                            <p class="text-[16px]"><span class="text-[#677483]">Группа</span><br>{{ auth()->user()->group->title }}</p>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-        @endteacherArea
-    </main>
+            @endstudentArea
+
+            @teacherArea
+            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                    @if(auth()->user()->logo)
+                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                    @endif
+                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
+                    <p class="text-sm text-[#677483]">Преподаватель</p>
+                </div>
+                <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center">
+                    <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center w-full">
+                        <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 w-full gap-3">
+                            @forelse($groups as $group)
+                                <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
+                                    <a href="{{route('teacher.one.group', $group->group->id)}}" class="text-md">
+                                        <p class="text-[14px] mb-1">Группа</p>{{ $group->group->title }}
+                                    </a>
+                                </div>
+                            @empty
+                                <h2 class="col-span-2 text-center text-gray-500">Нет ни одной группы в списке</h2>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endteacherArea
+        </main>
 </div>
 </body>
 </html>
