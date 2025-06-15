@@ -206,7 +206,7 @@ class BegetAPIService
      */
     public function findSubdomainIdByName($subdomains, $name)
     {
-        $fullName = $name . '.ktplatform.ru';
+        $fullName = $name . '.ktplatform.store';
 
         foreach ($subdomains as $subdomain) {
             if (isset($subdomain['fqdn']) && $subdomain['fqdn'] === $fullName) {
@@ -230,7 +230,6 @@ class BegetAPIService
     {
         // Шаг 1: Создать сайт
         $createSiteResponse = $this->createSite($name);
-
         if ($createSiteResponse['status'] !== 'success') {
             return $createSiteResponse; // Возвращаем ошибку, если сайт не был добавлен
         }

@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 
+
 .cont{
     position: relative;
 }
@@ -30,6 +31,7 @@
     border-radius: 10px 0 0 10px;
     border: 2px solid  #3F83F8;
     position: relative;
+    cursor:pointer;
 }
 
 
@@ -94,15 +96,11 @@
     width: 700px;
 }
 
-.details-btn {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.hidden-btn {
-    display: none;
-}
+    .details-btn {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
 
 @media (max-width: 767px) {
     .clip-left,
