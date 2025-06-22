@@ -88,35 +88,35 @@
             </div>
 
             <!-- Поля выбора типа и статуса -->
-            <div class="flex gap-5 my-6">
-                <div class="flex flex-col w-full">
-                    <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать
-                        тип</label>
-                    <select name="stat" id="type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Выбрать тип</option>
-                        <option value="theory">теория</option>
-                        <option value="practice">практика</option>
-                    </select>
-                    @error('stat')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="flex flex-col w-full">
-                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать
-                        статус</label>
-                    <select name="status" id="status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Выбрать статус</option>
-                        <option value="necessarily">обязательно</option>
-                        <option value="not necessary">не обязательно</option>
-                    </select>
-                    @error('status')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+{{--            <div class="flex gap-5 my-6">--}}
+{{--                <div class="flex flex-col w-full">--}}
+{{--                    <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать--}}
+{{--                        тип</label>--}}
+{{--                    <select name="stat" id="type"--}}
+{{--                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--}}
+{{--                        <option value="">Выбрать тип</option>--}}
+{{--                        <option value="theory">теория</option>--}}
+{{--                        <option value="practice">практика</option>--}}
+{{--                    </select>--}}
+{{--                    @error('stat')--}}
+{{--                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--                <div class="flex flex-col w-full">--}}
+{{--                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать--}}
+{{--                        статус</label>--}}
+{{--                    <select name="status" id="status"--}}
+{{--                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--}}
+{{--                        <option value="">Выбрать статус</option>--}}
+{{--                        <option value="necessarily">обязательно</option>--}}
+{{--                        <option value="not necessary">не обязательно</option>--}}
+{{--                    </select>--}}
+{{--                    @error('status')--}}
+{{--                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
 
-            </div>
+{{--            </div>--}}
 
             <!-- Скрытое поле с ID курса -->
             <input type="hidden" name="course_id" value="{{ $id }}">

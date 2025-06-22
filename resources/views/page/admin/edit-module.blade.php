@@ -16,7 +16,7 @@
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
-
+            @if(!empty($module->video_link))
                 <div class="mb-6">
                     <video
                         id="my-video"
@@ -33,7 +33,6 @@
                         </p>
                     </video>
                 </div>
-
                 {{-- Подключаем Video.js --}}
                 <link href="https://vjs.zencdn.net/8.11.0/video-js.css" rel="stylesheet" />
                 <script src="https://vjs.zencdn.net/8.11.0/video.min.js"></script>
@@ -45,6 +44,7 @@
                         });
                     });
                 </script>
+            @endif
 
                 <div class="mb-4 flex justify-around">
                     <div class="flex flex-col">
@@ -115,31 +115,31 @@
                 @enderror
             </div>
 
-            <!-- Поля выбора типа и статуса -->
-            <div class="flex gap-5 my-6">
-                <div class="flex flex-col w-full">
-                    <label for="stat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать тип</label>
-                    <select name="stat" id="stat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Выбрать тип</option>
-                        <option value="theory" {{ old('stat', $module->stat) == 'theory' ? 'selected' : '' }}>теория</option>
-                        <option value="practice" {{ old('stat', $module->stat) == 'practice' ? 'selected' : '' }}>практика</option>
-                    </select>
-                    @error('stat')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="flex flex-col w-full">
-                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать статус</label>
-                    <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Выбрать статус</option>
-                        <option value="necessarily" {{ old('status', $module->status) == 'necessarily' ? 'selected' : '' }}>обязательно</option>
-                        <option value="not necessary" {{ old('status', $module->status) == 'not necessary' ? 'selected' : '' }}>не обязательно</option>
-                    </select>
-                    @error('status')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+{{--            <!-- Поля выбора типа и статуса -->--}}
+{{--            <div class="flex gap-5 my-6">--}}
+{{--                <div class="flex flex-col w-full">--}}
+{{--                    <label for="stat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать тип</label>--}}
+{{--                    <select name="stat" id="stat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--}}
+{{--                        <option value="">Выбрать тип</option>--}}
+{{--                        <option value="theory" {{ old('stat', $module->stat) == 'theory' ? 'selected' : '' }}>теория</option>--}}
+{{--                        <option value="practice" {{ old('stat', $module->stat) == 'practice' ? 'selected' : '' }}>практика</option>--}}
+{{--                    </select>--}}
+{{--                    @error('stat')--}}
+{{--                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--                <div class="flex flex-col w-full">--}}
+{{--                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выбрать статус</label>--}}
+{{--                    <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--}}
+{{--                        <option value="">Выбрать статус</option>--}}
+{{--                        <option value="necessarily" {{ old('status', $module->status) == 'necessarily' ? 'selected' : '' }}>обязательно</option>--}}
+{{--                        <option value="not necessary" {{ old('status', $module->status) == 'not necessary' ? 'selected' : '' }}>не обязательно</option>--}}
+{{--                    </select>--}}
+{{--                    @error('status')--}}
+{{--                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <!-- Скрытое поле с ID курса -->
             <input type="hidden" name="course_id" value="{{ $module->course_id }}">

@@ -22,7 +22,8 @@ class ModuleService
     public function createModule($request)
     {
         $data = $this->validateModule($request);
-
+        $data['stat']= 'theory';
+        $data['status']= 'necessarily';
         $data['slug'] = Str::slug($request->input('title'));
 
         if ($request->hasFile('video')) {
@@ -80,8 +81,6 @@ class ModuleService
             'comment' => 'nullable|max:255',
             'theory' => 'required',
             'task' => 'required',
-            'stat' => 'required|in:theory,practice',
-            'status' => 'required|in:necessarily,not necessary',
             'course_id' => 'required|exists:courses,id',
             'video' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:51200',
             'video_avatar'  => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:10240',
