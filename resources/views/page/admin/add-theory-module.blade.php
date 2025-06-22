@@ -1,5 +1,5 @@
 @extends('includes.layout')
-@section('h2-name', 'Создание модуляё')
+@section('h2-name', 'Создание модуля')
 @section('content')
     <div>
         <form
@@ -46,7 +46,7 @@
                    dark:placeholder-gray-400 dark:text-white
                    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
-                @error('image')
+                @error('logo')
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                 @enderror
             </div>

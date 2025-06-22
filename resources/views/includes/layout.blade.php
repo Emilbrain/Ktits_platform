@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://vjs.zencdn.net/8.11.0/video-js.css" rel="stylesheet" />
+    <link href="https://vjs.zencdn.net/8.11.0/video-js.css" rel="stylesheet"/>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <!-- Include Quill library -->
@@ -21,28 +21,42 @@
         const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');
         const menuBar = document.querySelector('.content nav .bx.bx-menu');
         const sideBar = document.querySelector('.sidebar');
+        const mainContent = document.getElementById('mainContent');
 
-        // Проверка состояния меню при загрузке страницы
-        // Скрываем меню до завершения проверки состояния
         sideBar.style.opacity = '0';
         sideBar.style.visibility = 'hidden';
 
-        // Проверка состояния меню при загрузке страницы
-        if (localStorage.getItem('sidebarClosed') === 'true') {
+        if (window.innerWidth < 768) {
             sideBar.classList.add('close');
+            if (window.innerWidth < 576) {
+                mainContent.classList.remove('invisible');
+            }
         } else {
-            sideBar.classList.remove('close');
+            if (localStorage.getItem('sidebarClosed') === 'true') {
+                sideBar.classList.add('close');
+                if (window.innerWidth < 576) {
+                    mainContent.classList.remove('invisible');
+                }
+            } else {
+                sideBar.classList.remove('close');
+                if (window.innerWidth < 576) {
+                    mainContent.classList.add('invisible');
+                }
+            }
         }
 
-        // Показываем меню после завершения проверки состояния
+
         sideBar.style.opacity = '1';
         sideBar.style.visibility = 'visible';
 
-        // Добавление события клика для открытия/закрытия меню
         menuBar.addEventListener('click', () => {
             sideBar.classList.toggle('close');
-            // Сохранение состояния меню в localStorage
             localStorage.setItem('sidebarClosed', sideBar.classList.contains('close'));
+            if (window.innerWidth < 576) {
+                mainContent.classList.toggle('invisible');
+                localStorage.setItem('mainContent', sideBar.classList.contains('invisible'));
+
+            }
         });
 
         sideLinks.forEach(item => {
@@ -94,7 +108,7 @@
         });
     });
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const btn = e.target.closest('.copy-btn');
         if (!btn) return;
 
@@ -288,11 +302,12 @@
     </a>
     <ul class="side-menu">
         <li class="{{ request()->is('teacher') ? 'active' : '' }}">
-            <a href="{{ route('student.main') }}">
+            <a href="{{ route('teacher.main') }}">
                 <i class='bx bxs-dashboard'></i> Главная
             </a>
         </li>
-        <li class="{{request()->is('teacher/groups') ? 'active' : ''}}"><a href="{{ route('teacher.groups')}}"><i class='bx bx-store-alt'></i>Группы</a></li>
+        <li class="{{request()->is('teacher/groups') ? 'active' : ''}}"><a href="{{ route('teacher.groups')}}"><i
+                    class='bx bx-store-alt'></i>Группы</a></li>
         <li class="{{ request()->is('teacher/courses')|| request()->is('teacher/courses/*') ? 'active' : '' }}">
             <a href="{{ route('teacher.courses') }}">
                 <i class='bx bx-analyse'></i> Курсы
@@ -348,146 +363,170 @@
             </a>
         </nav>
     @endauth
-        <main class="flex flex-col lg:flex-row gap-5">
-            <div class="w-full lg:w-3/4 gap-5">
-                @include('includes.message')
-                @yield('content')
+    <main id="mainContent" class="flex flex-col lg:flex-row gap-5">
+        <div class="w-full lg:w-3/4 gap-5">
+            @include('includes.message')
+            @yield('content')
+        </div>
+
+        @adminArea
+        <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                @if(auth()->user()->logo)
+                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                @else
+                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                @endif
+                <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
+                <p><span class="text-[#677483]">Администратор</span></p>
+            </div>
+        </div>
+        @endadminArea
+
+        @studentArea
+        <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                @if(auth()->user()->logo)
+                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                @else
+                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                @endif
+                <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
             </div>
 
-            @adminArea
-            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
-                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                    @if(auth()->user()->logo)
-                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                    @else
-                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                    @endif
-                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                    <p><span class="text-[#677483]">Администратор</span></p>
+            <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center text-sm ">
+                <h3 class="text-xl font-bold text-gray-800 text-center">Данные личного домена</h3>
+                <div class="w-full">
+                    <p class="flex sm:items-center flex-col sm:flex-row">
+                        <span class="text-[#677483]">Ссылка на сайт: </span>
+                        <a href="http://{{ auth()->user()->login }}.{{ $fileZilla->host }}">{{ auth()->user()->login }}
+                            .{{ $fileZilla->host }}</a>
+                    </p>
                 </div>
-            </div>
-            @endadminArea
-
-            @studentArea
-            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
-                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                    @if(auth()->user()->logo)
-                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                    @else
-                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                    @endif
-                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                    <p class="text-center"><span class="text-[#677483]">Студент группы: </span>{{ auth()->user()->group->title }}</p>
-                </div>
-
-                <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center text-sm">
-                    <h3 class="text-xl font-bold text-gray-800 text-center">Данные личного домена</h3>
-                    <div class="w-full">
-                        <p><span class="text-[#677483]">Ссылка на сайт: </span>
-                            <a href="http://{{ auth()->user()->login }}.{{ $fileZilla->host }}">{{ auth()->user()->login }}.{{ $fileZilla->host }}</a>
+                <div class="w-full">
+                    <p class="text-md font-semibold">Подключение для FileZilla</p>
+                    <div class="mt-2 space-y-2">
+                        <p class="flex sm:items-center flex-col sm:flex-row ">
+                            <span class="text-[#677483]">Хост: </span>
+                            <span class="flex items-center">
+                            <span class="ml-1 copy-text">{{ $fileZilla->host }}</span>
+                            <button class="ml-2 copy-btn" title="Копировать">
+                                <i class='bx bx-copy text-lg text-gray-500'></i>
+                            </button>
+                        </span>
                         </p>
-                    </div>
-                    <div class="w-full">
-                        <p class="text-md font-semibold">Подключение для FileZilla</p>
-                        <div class="mt-2 space-y-2">
-                            <p class="flex items-center"><span class="text-[#677483]">Хост: </span>
-                                <span class="ml-1 copy-text">{{ $fileZilla->host }}</span>
-                                <button class="ml-2 copy-btn" title="Копировать">
-                                    <i class='bx bx-copy text-lg text-gray-500'></i>
-                                </button>
-                            </p>
-                            <p class="flex items-center"><span class="text-[#677483]">Имя пользователя: </span>
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                            <span class="text-[#677483]">Имя пользователя: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ $fileZilla->username }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                            </span>
+                        </p>
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                            <span class="text-[#677483]">Пароль: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ $fileZilla->password }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                        </div>
+                            </span>
+                        </p>
                     </div>
-                    <div class="w-full">
-                        <p class="text-md font-semibold">Подключение для phpMyAdmin</p>
-                        <div class="mt-2 space-y-2">
-                            <p><a href="https://argent.beget.com/phpMyAdmin">Ссылка</a></p>
-                            <p class="flex items-center"><span class="text-[#677483]">Имя пользователя: </span>
+                </div>
+                <div class="w-full">
+                    <p class="text-md font-semibold">Подключение для phpMyAdmin</p>
+                    <div class="mt-2 space-y-2">
+                        <p><a href="https://argent.beget.com/phpMyAdmin">Ссылка</a></p>
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                        <span class="text-[#677483]">Имя пользователя: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ $database->username }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                            </span>
+                        </p>
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                            <span class="text-[#677483]">Пароль: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ $database->password }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                        </div>
+                            </span>
+                        </p>
                     </div>
-                    <div class="w-full">
-                        <p class="text-md font-semibold">Данные для платформы</p>
-                        <div class="mt-2 space-y-2">
-                            <p class="flex items-center"><span class="text-[#677483]">Логин: </span>
+                </div>
+                <div class="w-full">
+                    <p class="text-md font-semibold">Данные для платформы</p>
+                    <div class="mt-2 space-y-2">
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                        <span class="text-[#677483]">Логин: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ auth()->user()->login }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                            <p class="flex items-center"><span class="text-[#677483]">Пароль: </span>
+                            </span>
+                        </p>
+                        <p class="flex sm:items-center flex-col sm:flex-row">
+                        <span class="text-[#677483]">Пароль: </span>
+                            <span class="flex items-center">
                                 <span class="ml-1 copy-text">{{ auth()->user()->pp }}</span>
                                 <button class="ml-2 copy-btn" title="Копировать">
                                     <i class='bx bx-copy text-lg text-gray-500'></i>
                                 </button>
-                            </p>
-                        </div>
+                            </span>
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center">
+            <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center">
+                <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
+                <div class="grid w-full gap-3">
+                    <a href="{{ auth()->user()->group->link }}"
+                       class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
+                        <p class="text-[16px]"><span
+                                class="text-[#677483]">Группа</span><br>{{ auth()->user()->group->title }}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @endstudentArea
+
+        @teacherArea
+        <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
+            <div class="flex rounded-xl bg-white flex-col p-6 items-center">
+                @if(auth()->user()->logo)
+                    <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
+                @else
+                    <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
+                @endif
+                <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
+                <p class="text-sm text-[#677483]">Преподаватель</p>
+            </div>
+            <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center">
+                <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center w-full">
                     <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
-                    <div class="grid w-full gap-3">
-                        <a href="{{ auth()->user()->group->link }}" class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                            <p class="text-[16px]"><span class="text-[#677483]">Группа</span><br>{{ auth()->user()->group->title }}</p>
-                        </a>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 w-full gap-3">
+                        @forelse($groups as $group)
+                            <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
+                                <a href="{{route('teacher.one.group', $group->group->id)}}" class="text-md">
+                                    <p class="text-[14px] mb-1">Группа</p>{{ $group->group->title }}
+                                </a>
+                            </div>
+                        @empty
+                            <h2 class="col-span-2 text-center text-gray-500">Нет ни одной группы в списке</h2>
+                        @endforelse
                     </div>
                 </div>
             </div>
-            @endstudentArea
-
-            @teacherArea
-            <div class="w-full lg:w-1/4 gap-y-5 flex flex-col">
-                <div class="flex rounded-xl bg-white flex-col p-6 items-center">
-                    @if(auth()->user()->logo)
-                        <img src="{{ asset('storage/' . auth()->user()->logo) }}" alt="" class="w-16 h-16 mb-4">
-                    @else
-                        <img src="{{ asset('images/user.png') }}" alt="" class="w-16 h-16 mb-4">
-                    @endif
-                    <h3 class="mb-2 text-center">{{ auth()->user()->username }} {{ auth()->user()->patronymic }}</h3>
-                    <p class="text-sm text-[#677483]">Преподаватель</p>
-                </div>
-                <div class="flex rounded-xl bg-white shadow-lg flex-col gap-y-6 p-6 items-center">
-                    <div class="flex rounded-xl bg-white flex-col gap-y-6 p-6 items-center w-full">
-                        <img src="{{ asset('images/spisok.png') }}" alt="" class="w-16">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 w-full gap-3">
-                            @forelse($groups as $group)
-                                <div class="flex justify-center shadow-md gap-2 bg-white rounded-xl text-center p-2">
-                                    <a href="{{route('teacher.one.group', $group->group->id)}}" class="text-md">
-                                        <p class="text-[14px] mb-1">Группа</p>{{ $group->group->title }}
-                                    </a>
-                                </div>
-                            @empty
-                                <h2 class="col-span-2 text-center text-gray-500">Нет ни одной группы в списке</h2>
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endteacherArea
-        </main>
+        </div>
+        @endteacherArea
+    </main>
 </div>
 </body>
 </html>

@@ -34,7 +34,6 @@
             <a href="#footer" class="hover:underline">Контакты</a>
         </nav>
 
-        <!-- Кнопка -->
 
     </div>
 </header>
@@ -70,14 +69,15 @@
 
 
 <section class=" bg-white py-16 px-4 w-full " id="directions">
-    <div class="max-w-6xl mx-auto ">
+    {{--    <div class="max-w-6xl mx-auto ">--}}
+    <div class="max-w-[1300px] mx-auto ">
         <h2 class="text-2xl md:text-3xl font-semibold mb-8">Направления</h2>
 
         <!-- Верхние карточки -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 cont">
+        <div class="grid grid-cols-1 sm:grid-cols-2 cont gap-4 md:gap-12 lg:gap-12 xl:gap-48">
             <!-- Левая карточка -->
             <div id="card1" onclick="switchProgram(1)"
-                 class="dcursor-pointer transition py-32 shadow-md clip-left active-card h-full ">
+                 class="cursor-pointer transition py-32 shadow-md clip-left active-card h-full ">
                 <h3 class="text-lg font-medium mb-4 leading-tight text-center ">
                     <p class="uppercase">
                         09.02.07
@@ -91,7 +91,7 @@
                     </p>
 
                 </h3>
-                <button class="details-btn text-[#3F83F8] absolute bottom-9 left-52">
+                <button class="details-btn text-[#3F83F8] absolute bottom-9 right-32">
                     <span>Подробнее</span>
                     <i class='bx bx-chevron-down'></i>
                 </button>
@@ -100,7 +100,7 @@
             <!-- Правая карточка -->
             <div id="card2" onclick="switchProgram(2)"
                  class="p-6 border-2 relative  py-32 cursor-pointer transition clip-right  shadow-md h-full">
-                <h3 class="text-lg font-medium text-center mb-4 leading-tight absolute right-0">
+                <h3 class="text-lg font-medium text-center mb-4 leading-tight absolute right-8">
                     <p class="uppercase ">09.02.09</p>
                     <p class="uppercase mt-2">Веб-разработка.</p>
                     <p class="mt-4">Квалификация: Разработчик веб приложений</p>
@@ -113,118 +113,39 @@
         </div>
         <!-- Нижние блоки -->
 
-        <div class="flex  gap-2 mt-4 relative">
-            <!-- Левый текст -->
-            <div id="descBlock"
-                 class=" text-black p-4 rounded-lg text-justify leading-relaxed text-sm sm:text-base w-[700px] ">
-            </div>
+        <div class="flex  gap-2 mt-4 relative justify-between">
 
+            <!-- Левый текст -->
+            <div class="flex flex-col gap-4">
+                <div id="left-1"
+                     class=" text-black p-6 rounded-lg text-justify leading-relaxed text-sm sm:text-base  border-2 max-w-[860px] border-[#EFF6FF]">
+                </div>
+
+                <div id="left-2"
+                     class="border-2 border-[#EFF6FF] p-6 rounded-lg max-w-[860px]"
+                >
+                </div>
+
+                <div id="left-3"
+                     class="border-2 border-[#EFF6FF] p-6 rounded-lg max-w-[860px]"
+                >
+                </div>
+
+                <div id="left-4"
+                     class="border-2 border-[#EFF6FF] p-6 rounded-lg max-w-[860px]"
+                >
+                </div>
+
+                <div id="left-5"
+                     class="border-2 border-[#EFF6FF] p-6 rounded-lg max-w-[860px]"
+                >
+                </div>
+
+            </div>
             <!-- Правый текст с иконками -->
             <div id="infoBlock"
-                 class="bg-[#3F83F8] text-white rounded-lg p-10 h-min sticky top-0 text-sm sm:text-base w-[350px]">
+                 class="bg-[#EFF6FF]  rounded-lg p-10 h-min sticky top-[110px] text-sm sm:text-base max-w-[430px]">
                 <!-- Контент будет меняться -->
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-white py-2 px-4">
-    <div class="max-w-6xl mx-auto">
-
-        <div class="flex flex-col lg:flex-row  gap-1">
-            <!-- Левая колонка -->
-            <div class="flex flex-col gap-3 h-full  max-w-[550px]">
-                <!-- Ключевые дисциплины -->
-                <div class="bg-[#3F83F8] text-white p-6 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-4">Ключевые профессиональные дисциплины:</h3>
-                    <ul class="space-y-3 text-sm mt-8">
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Проектирование и дизайн
-                            информационных систем
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Разработка
-                            веб-информационных систем
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Тестирование
-                            информационных систем
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Разработка мобильных
-                            приложений
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Графический дизайн и
-                            мультимедиа
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Оптимизация
-                            веб-приложений
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg'></i> Безопасность
-                            веб-приложений
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Где можно работать -->
-                <div class="bg-white border border-[#3F83F8] text-[#3F83F8] p-6 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-4">Где можно работать после колледжа?</h3>
-                    <ul class="space-y-3 text-sm mt-6">
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Фронтенд-разработчик</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Бэкенд-разработчик</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Fullstack-разработчик</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Веб-дизайнер</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Тестировщик ПО</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Специалист по сопровождению
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Контент-менеджер</li>
-                    </ul>
-                    <div class="flex items-start text-[#3F83F8] text-[12px] mt-5">
-                        <i class='bx bx-info-circle text-[16px] mr-2'></i>
-                        <p>
-                            Можно работать в IT-компаниях, студиях веб-разработки, рекламных агентствах, фрилансе,
-                            стартапах или продолжить обучение в вузе.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Правая колонка -->
-            <div class="flex flex-col gap-3 h-full lg:max-w-2xl">
-                <div class="bg-white border border-[#3F83F8] text-[#3F83F8] p-6 rounded-lg ">
-                    <h3 class="text-lg font-semibold mb-4">Кому подойдёт эта специальность?</h3>
-                    <p class="mb-2 text-lg">Если тебе нравится:</p>
-                    <ul class="space-y-3 text-sm mt-6">
-                        <li class="flex items-start gap-2"><i class='bx bx-heart'></i> Работать с компьютерами и
-                            технологиями
-                        </li>
-                        <li class="flex items-start gap-2"><i class='bx bx-heart'></i> Создавать сайты, приложения или
-                            игры
-                        </li>
-                        <li class="flex items-start gap-2"><i class='bx bx-heart'></i> Разбираться в программировании и
-                            дизайне
-                        </li>
-                        <li class="flex items-start gap-2"><i class='bx bx-heart'></i> Решать логические задачи и
-                            придумывать новые идеи
-                        </li>
-                    </ul>
-                    <p class="mt-4 font-semibold text-lg">— это отличный выбор!</p>
-                </div>
-
-                <div class="bg-[#3F83F8] text-white p-6 rounded-lg flex  flex-col justify-between">
-                    <h3 class="text-lg font-semibold mb-4">Чему ты научишься?</h3>
-                    <ul class="space-y-3 text-sm mt-7">
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Вёрстке и разработке (HTML, CSS,
-                            JS, React/Vue)
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Бэкенду: PHP, Laravel, Python
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Тестированию и поддержке систем
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Проектированию интерфейсов</li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> UX/UI-дизайну (Figma)</li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Работа с БД (MySQL)</li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> CMS (WordPress)</li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check'></i> Создание приложений и веб-сайтов
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -232,205 +153,229 @@
 
 
 <section class="bg-white py-16" id="teachers">
-    <div class="bg-[#3F83F8] p-8 rounded-lg">
+    <div class="bg-[#EFF6FF]  p-16 rounded-lg">
         <div class="max-w-[1300px] mx-auto">
-            <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-white ">Преподаватели</h2>
-
+            <h2 class="text-2xl md:text-3xl font-semibold mb-8  ">Преподаватели</h2>
         </div>
-        <div class="max-w-[1300px] mx-auto flex items-center flex-wrap gap-16   ">
+        <div class="max-w-[1300px] mx-auto flex items-center flex-wrap justify-center gap-4   ">
             {{--            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10">--}}
             <!-- Один элемент -->
-            <div class="flex flex-col items-center text-white text-center">
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
                 <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
                     <img src="{{ asset('teacher/Dinar.jpg') }}" alt="Преподаватель"
                          class="w-full h-full object-cover"/>
                 </div>
                 <p class="text-sm mt-3 font-semibold leading-tight">Хайруллин <br> Динар Ильсурович</p>
-                <p class="text-xs mb-2">Председатель цикловой комиссии <br> «Веб-технологии»</p>
                 <button onclick="openModal('teacher1')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition">
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
                     Подробнее
                 </button>
             </div>
 
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/Alsu.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Зифарова <br> Алсу Вильдановна</p>
-                <button onclick="openModal('teacher2')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/Alina.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Халиуллина <br> Алина Рафаилевна</p>
-                <button onclick="openModal('teacher3')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/Lily.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight"> Фазлиева <br> Лилия Ришатовна</p>
-                <button onclick="openModal('teacher4')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/Misha.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Лапаев <br> Михаил Дмиитриевич</p>
-                <button onclick="openModal('teacher5')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/NiazG.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Гимадиев <br> Нияз Наилевич</p>
-                <button onclick="openModal('teacher6')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/NiazN.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Гатауллин <br> Нияз Рамилевич</p>
-                <button onclick="openModal('teacher7')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-
-            <div class="flex flex-col items-center text-white text-center">
-                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
-                    <img src="{{ asset('teacher/Regina.jpg') }}" alt="Преподаватель"
-                         class="w-full h-full object-cover"/>
-                </div>
-                <p class="text-sm mt-3 font-semibold leading-tight">Данилкина <br> Регина Сергеевна</p>
-                <button onclick="openModal('teacher8')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
-                    Подробнее
-                </button>
-            </div>
-            <div class="flex flex-col items-center text-white text-center">
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
                 <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
                     <img src="{{ asset('teacher/ruslan.jpg') }}" alt="Преподаватель"
                          class="w-full h-full object-cover"/>
                 </div>
                 <p class="text-sm mt-3 font-semibold leading-tight">Зарипов <br> Руслан Ринатович</p>
                 <button onclick="openModal('teacher9')"
-                        class="text-sm bg-white text-[#3F83F8] px-4 py-1 rounded hover:bg-gray-100 transition mt-3">
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
                     Подробнее
                 </button>
             </div>
 
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/Alsu.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Зифарова <br> Алсу Вильдановна</p>
+                <button onclick="openModal('teacher2')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/Alina.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Халиуллина <br> Алина Рафаилевна</p>
+                <button onclick="openModal('teacher3')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/Lily.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight"> Фазлиева <br> Лилия Ришатовна</p>
+                <button onclick="openModal('teacher4')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/Misha.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Лапаев <br> Михаил Дмиитриевич</p>
+                <button onclick="openModal('teacher5')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/NiazG.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Гимадиев <br> Нияз Наилевич</p>
+                <button onclick="openModal('teacher6')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/NIazN.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Гатауллин <br> Нияз Рамилевич</p>
+                <button onclick="openModal('teacher7')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
+
+            <div class="flex flex-col items-center  text-center p-4 rounded-lg bg-white">
+                <div class="w-[200px] h-[200px] rounded-full overflow-hidden">
+                    <img src="{{ asset('teacher/Regina.jpg') }}" alt="Преподаватель"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <p class="text-sm mt-3 font-semibold leading-tight">Данилкина <br> Регина Сергеевна</p>
+                <button onclick="openModal('teacher8')"
+                        class="text-sm bg-[#3F83F8] text-white px-4 py-1 rounded hover:bg-gray-100 transition mt-2">
+                    Подробнее
+                </button>
+            </div>
         </div>
     </div>
 
+
+
+
+
+    <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+
+
+
     <!-- Модальное окно -->
-    <div id="teacher1" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher1')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher1" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-teacher1')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Dinar.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Dinar.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Хайруллин Динар Ильсурович</p>
+                    <p class="text-base sm:text-lg">Хайруллин Динар Ильсурович</p>
+                    <p class="text-xs sm:text-sm mt-2">Председатель цикловой комиссии <br> «Веб-технологии»</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ВВЕДЕНИЕ В СПЕЦИАЛЬНОСТЬ
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
+
                         - МДК.08.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ИНТЕРФЕЙСОВ ПОЛЬЗОВАТЕЛЯ
 
                     </li>
-                    <li>
-                        - МДК.05.01 ПРОЕКТИРОВАНИЕ И ДИЗАЙН ИНФОРМАЦИОННЫХ СИСТЕМ
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
 
+                        - МДК.05.01 ПРОЕКТИРОВАНИЕ И ДИЗАЙН ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
+
                         - ОП.14 ВЕБ ДИЗАЙН
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
+
                         - ГОСУДАРСТВЕННАЯ ИТОГОВАЯ АТТЕСТАЦИЯ
 
                     </li>
-                    <li>
+                    <li class="flex gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
+
                         - РУКОВОДСТВО ВЫПУСКНЫМИ КВАЛИФИКАЦИОННЫМИ РАБОТАМИ
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher2" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher2')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher2" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher2')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Alsu.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Alsu.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Зифарова Алсу Вильдановна</p>
+                    <p class="text-base sm:text-lg">Зифарова Алсу Вильдановна</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.03 ТЕСТИРОВАНИЕ ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.08.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ИНТЕРФЕЙСОВ ПОЛЬЗОВАТЕЛЯ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.08.02 ГРАФИЧЕСКИЙ ДИЗАЙН И МУЛЬТИМЕДИА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - 09.03 ОБЕСПЕЧЕНИЕ БЕЗОПАСНОСТИ ВЕБ ПРИЛОЖЕНИЙ
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ПП.08.01 ПРОИЗВОДСТВЕННАЯ ПРАКТИКА
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.08.01 УЧЕБНАЯ ПРАКТИКА
 
                     </li>
@@ -438,241 +383,266 @@
             </div>
         </div>
     </div>
-    <div id="teacher3" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher3')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher3" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher3')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Alina.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Alina.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Халиуллина Алина Рафаилевна
-                    </p>
+                    <p class="text-base sm:text-lg">Халиуллина Алина Рафаилевна</p>
+
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.09.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ВЕБ ПРИЛОЖЕНИЙ
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.01 ПРОЕКТИРОВАНИЕ И ДИЗАЙН ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.05.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher4" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher4')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher4" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher4')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Lily.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Lily.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Фазлиева Лилия Ришатовна
-                    </p>
+                    <p class="text-base sm:text-lg">Фазлиева Лилия Ришатовна</p>
                 </div>
             </div>
 
+
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.01 ПРОЕКТИРОВАНИЕ И ДИЗАЙН ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.08.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.02 РАЗРАБОТКА КОДА ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ПП.09.01 ПРОИЗВОДСТВЕННАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher5" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher5')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher5" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher5')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Misha.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Misha.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Лапаев Михаил Дмиитриевич
-                    </p>
+                    <p class="text-base sm:text-lg">Лапаев Михаил Дмиитриевич</p>
                 </div>
             </div>
 
+
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - 09.03 ОБЕСПЕЧЕНИЕ БЕЗОПАСНОСТИ ВЕБ ПРИЛОЖЕНИЙ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.08.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ИНТЕРФЕЙСОВ ПОЛЬЗОВАТЕЛЯ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.08.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.09.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.05.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher6" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher6')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher6" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher6')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/NiazG.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/NiazG.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Гимадиев Нияз Наилевич
-                    </p>
+                    <p class="text-base sm:text-lg">Гимадиев Нияз Наилевич</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.02 РАЗРАБОТКА КОДА ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.05.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.09.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher7" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher7')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher7" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
+            <button onclick="closeModal('modal-teacher7')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/NiazN.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/NIazN.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Гатауллин Нияз Рамилевич
-                    </p>
+                    <p class="text-base sm:text-lg">Гатауллин Нияз Рамилевич</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.09.02 ОПТИМИЗАЦИЯ ВЕБ ПРИЛОЖЕНИЙ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.02 РАЗРАБОТКА КОДА ИФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.09.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ВЕБ ПРИЛОЖЕНИЙ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.05.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher8" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher8')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher8" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-teacher8')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/Regina.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/Regina.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Данилкина Регина Сергеевна
-                    </p>
+                    <p class="text-base sm:text-lg">Данилкина Регина Сергеевна</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.08.02 ГРАФИЧЕСКИЙ ДИЗАЙН И МУЛЬТИМЕДИА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ОП.14 ВЕБ ДИЗАЙН
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.05.03 ТЕСТИРОВАНИЕ ИНФОРМАЦИОННЫХ СИСТЕМ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ПП.05.01 ПРОИЗВОДСТВЕННАЯ ПРАКТИКА
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - УП.08.01 УЧЕБНАЯ ПРАКТИКА
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="teacher9" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-[#3F83F8] text-white rounded-lg max-w-[450px] w-full p-6 relative">
-            <button onclick="closeModal('teacher8')" class="absolute top-2 right-2 text-white hover:text-gray-200">
+    <div id="modal-teacher9" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-teacher9')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
-
-            <div class="flex items-center gap-4 mb-4">
-                <img src="{{ asset('teacher/ruslan.jpg') }}" class="w-[70px] h-[70px] rounded-full object-cover"
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
+                <img src="{{ asset('teacher/ruslan.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
-                    <p class="text-sm">Зарипов Руслан Ринатович
-                    </p>
+                    <p class="text-base sm:text-lg">Зарипов Руслан Ринатович</p>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h4 class="font-semibold mb-1">Преподаваемые предметы</h4>
-                <ul class="list-disc ml-5 text-sm space-y-3">
-                    <li>
+                <h4 class="font-semibold text-base sm:text-lg mb-2">Преподаваемые предметы</h4>
+                <ul class="list-disc ml-5 space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.09.01 ПРОЕКТИРОВАНИЕ И РАЗРАБОТКА ВЕБ ПРИЛОЖЕНИЙ
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - МДК.09.02 ОПТИМИЗАЦИЯ ВЕБ ПРИЛОЖЕНИЙ
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - ГОСУДАРСТВЕННАЯ ИТОГОВАЯ АТТЕСТАЦИЯ
 
                     </li>
-                    <li>
+                    <li class="flex items-center gap-2">
+                        <i class="bx bx-book text-[#3F83F8]"></i>
                         - РУКОВОДСТВО ВЫПУСКНЫМИ КВАЛИФИКАЦИОННЫМИ РАБОТАМИ
 
                     </li>
@@ -760,22 +730,42 @@
         </div>
     </footer>
 </section>
-
 </body>
 <script>
     function openModal(id) {
-        document.getElementById(id).classList.remove('hidden');
+        const modal = document.getElementById('modal-' + id);
+        if (modal) {
+            modal.classList.remove('invisible');
+            document.body.classList.add('overflow-hidden');
+            document.documentElement.classList.add('overflow-hidden');
+        }
     }
 
     function closeModal(id) {
-        document.getElementById(id).classList.add('hidden');
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('invisible');
+            document.body.classList.remove('overflow-hidden');
+            document.documentElement.classList.remove('overflow-hidden');
+        }
     }
-</script>
 
+    document.addEventListener('mousedown', function (e) {
+        const modals = document.querySelectorAll('[id^="modal-"]');
+        modals.forEach(modal => {
+            if (!modal.classList.contains('invisible')) {
+                const content = modal.querySelector('.bg-white');
+                if (content && !content.contains(e.target)) {
+                    closeModal(modal.id);
+                }
+            }
+        });
+    });
+</script>
 <script>
     const data = {
         1: {
-            desc: `
+            left1: `
             <p> Данная квалификация присваивается FrontEnd и BackEnd разработчикам, а именно Веб-дизайнерам и Веб-программистам. </p>
             <p class="mt-[37px]" > На данном направление изучают современные технологии проектирования и создания макетов сайтов. </p>
             <p class="mt-[37px]" > Разработчики WEB и мультимедийных приложений получают богаты опыт в реализации адаптивной верстки сайтов под мобильные, планшетный и компьютерные устройства. </p>
@@ -783,6 +773,95 @@
             <p class="mt-[37px]" > Разработчики веб и мультимедийных приложений сочетают в своей работе технические и дизайнерские знания и навыки для проведения анализа, проектирования, программирования и изменения веб-сайтов и приложений, объединяющих текстовые, графические, мультимедийные средства. </p>
             <p class="mt-[37px]" > Данная специализация позволяет стать профессиональным программистом для создания WEB-приложений, корпоративных сайтов и Интернет-магазинов. </p>
       `,
+            left2: `
+               <h3 class="text-2xl font-semibold mb-4">Ключевые профессиональные дисциплины:</h3>
+                    <ul class="space-y-3 text-sm mt-8">
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Проектирование и дизайн
+                            информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка
+                            веб-информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Тестирование
+                            информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка мобильных
+                            приложений
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Графический дизайн и
+                            мультимедиа
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Оптимизация
+                            веб-приложений
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Безопасность
+                            веб-приложений
+                        </li>
+                    </ul>
+
+            `,
+            left3: `
+          <h3 class="text-2xl font-semibold mb-4">Где можно работать после колледжа?</h3>
+                    <ul class="space-y-3 text-sm mt-6">
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Фронтенд-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Бэкенд-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Fullstack-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Веб-дизайнер</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Тестировщик ПО</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Специалист по сопровождению
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Контент-менеджер</li>
+                    </ul>
+                    <div class="flex items-start  text-[12px] mt-5 p-4 bg-[#F2F8FF] rounded-xl">
+                        <i class='bx bx-info-circle text-[16px] mr-2 text-[#3F83F8]'></i>
+                        <p class="">
+                           <span class="font-bold"> Можно работать: </span> в IT-компаниях, студиях веб-разработки, рекламных агентствах, фрилансе,
+                            стартапах или продолжить обучение в вузе.
+                        </p>
+                    </div>
+
+            `,
+            left4: `
+                     <h3 class="text-2xl font-semibold mb-4">Кому подойдёт эта специальность?</h3>
+                    <p class="mb-2 text-lg">Если тебе нравится:</p>
+                    <ul class="space-y-3 text-sm mt-6">
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Работать с компьютерами и
+                            технологиями
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Создавать сайты, приложения или
+                            игры
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Разбираться в программировании и
+                            дизайне
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Решать логические задачи и
+                            придумывать новые идеи
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Работать удаленно
+                        </li>
+                    </ul>
+                    <p class="mt-4 font-semibold text-lg text-[#3F83F8]">— это отличный выбор!</p>
+
+            `,
+            left5: `
+                     <h3 class="text-2xl font-semibold mb-4">Чему ты научишься?</h3>
+                    <ul class="space-y-3 text-sm mt-7">
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Вёрстке и разработке (HTML, CSS,
+                            JS, React/Vue)
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Бэкенду: PHP, Laravel, Python
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Тестированию и поддержке систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Проектированию интерфейсов</li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> UX/UI-дизайну (Figma)</li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Работа с БД (MySQL)</li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> CMS (WordPress)</li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Создание приложений и веб-сайтов
+                        </li>
+                    </ul>
+
+            `,
             info: `
         <p class="flex flex-row  gap-4"> <i class='bx bx-time'></i> Срок обучения: 3 г. 10 мес.</p>
         <p class="flex flex-row  gap-4 mt-7" ><i class='bx bx-badge-check'></i> Квалификация: Разработчик веб и мультимедийных приложений</p>
@@ -793,7 +872,7 @@
       `
         },
         2: {
-            desc: `
+            left1: `
      <p> Данная квалификация присваивается FrontEnd и BackEnd разработчикам, а именно Веб-дизайнерам и Веб-программистам. </p>
             <p class="mt-[37px]" > На данном направление изучают современные технологии проектирования и создания макетов сайтов. </p>
             <p class="mt-[37px]" > Разработчики WEB и мультимедийных приложений получают богаты опыт в реализации адаптивной верстки сайтов под мобильные, планшетный и компьютерные устройства. </p>
@@ -801,6 +880,54 @@
             <p class="mt-[37px]" > Разработчики веб и мультимедийных приложений сочетают в своей работе технические и дизайнерские знания и навыки для проведения анализа, проектирования, программирования и изменения веб-сайтов и приложений, объединяющих текстовые, графические, мультимедийные средства. </p>
             <p class="mt-[37px]" > Данная специализация позволяет стать профессиональным программистом для создания WEB-приложений, корпоративных сайтов и Интернет-магазинов. </p>
       `,
+            left2: `
+               <h3 class="text-lg font-semibold mb-4">Ключевые профессиональные дисциплины:</h3>
+                    <ul class="space-y-3 text-sm mt-8">
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Проектирование и дизайн
+                            информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка
+                            веб-информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Тестирование
+                            информационных систем
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка мобильных
+                            приложений
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Графический дизайн и
+                            мультимедиа
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Оптимизация
+                            веб-приложений
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Безопасность
+                            веб-приложений
+                        </li>
+                    </ul>
+
+            `,
+            left3: `
+          <h3 class="text-lg font-semibold mb-4">Где можно работать после колледжа?</h3>
+                    <ul class="space-y-3 text-sm mt-6">
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Фронтенд-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Бэкенд-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Fullstack-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Веб-дизайнер</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Тестировщик ПО</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Специалист по сопровождению
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Контент-менеджер</li>
+                    </ul>
+                    <div class="flex items-start text-[#3F83F8] text-[12px] mt-5">
+                        <i class='bx bx-info-circle text-[16px] mr-2'></i>
+                        <p>
+                            Можно работать в IT-компаниях, студиях веб-разработки, рекламных агентствах, фрилансе,
+                            стартапах или продолжить обучение в вузе.
+                        </p>
+                    </div>
+
+            `,
             info: `
         <p class="flex flex-row items-center gap-4"> <i class='bx bx-time'></i> Срок обучения: 3 г. 10 мес.</p>
         <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-badge-check'></i> Квалификация: Разработчик веб и мультимедийных приложений</p>
@@ -830,7 +957,11 @@
         inactiveCard.classList.add();
 
         // Сменить содержимое
-        document.getElementById('descBlock').innerHTML = data[id].desc;
+        document.getElementById('left-1').innerHTML = data[id].left1;
+        document.getElementById('left-2').innerHTML = data[id].left2;
+        document.getElementById('left-3').innerHTML = data[id].left3;
+        document.getElementById('left-4').innerHTML = data[id].left4;
+        document.getElementById('left-5').innerHTML = data[id].left5;
         document.getElementById('infoBlock').innerHTML = data[id].info;
     }
 
@@ -843,7 +974,6 @@
         const nav = document.getElementById('main-nav');
         const ckLogo = document.getElementById('ck-logo');
         const ktitsLogo = document.getElementById('ktits-logo');
-        const button = document.getElementById('button_header')
 
         if (window.scrollY > 50) {
             header.classList.add('bg-white', 'shadow-md');

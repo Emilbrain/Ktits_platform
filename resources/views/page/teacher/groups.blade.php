@@ -2,17 +2,28 @@
 @section('h2-name', 'Группы')
 @section('content')
     <!-- Main Content -->
-    <div class="grid grid-cols-4 gap-5">
-        @forelse($groups as $group)
-            <a href="{{route('teacher.one.group', $group->group->id)}}" class="w-full bg-white rounded-xl p-3 flex flex-col items-center gap-3 justify-center">
-                {{--                        php--}}
-                <img src="{{ asset('images/user.png') }}" alt="" class="h-28">
-                <h4 class="text-md">{{$group->group->title}} </h4>
-            </a>
-        @empty
-            <h2 class="col-span-4">Нет ни одной группы в списке </h2>
-        @endforelse
-    </div>
+        <h2 class="text-2xl font-bold mb-4">Мои группы</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @forelse($groups as $group)
+                <a
+                    href="{{ route('teacher.one.group', $group->group->id) }}"
+                    class="bg-white shadow rounded-xl p-4 flex flex-col items-center justify-center gap-4 hover:shadow-lg transition h-full"
+                >
+                    <img
+                        src="{{ asset('images/user.png') }}"
+                        alt="{{ $group->group->title }} avatar"
+                        class="object-contain h-32 w-full mb-2"
+                    >
+                    <h4 class="text-md font-semibold text-gray-800 text-center">
+                        {{ $group->group->title }}
+                    </h4>
+                </a>
+            @empty
+                <p class="col-span-full text-center text-gray-600">
+                    Нет ни одной группы в списке
+                </p>
+            @endforelse
+        </div>
 {{--    <script>--}}
 {{--        const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logout)');--}}
 

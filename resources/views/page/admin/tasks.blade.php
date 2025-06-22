@@ -1,71 +1,89 @@
 @extends('includes.layout')
 @section('h2-name', 'Курсы')
 @section('content')
-    @foreach($tasks as $task)
-        @if(count($task->comments)>0)
-            <div class="flex flex-col bg-white rounded-t-xl p-4 border-b-2 border-amber-200">
-                <h4 class="text-blue-200">Комментарии:</h4>
-                @foreach($task->comments as $item)
-                    <div class="flex w-full justify-between">
-                       <p>{{ $item->text }}</p>
-                       <p>{{ $item->created_at }}</p>
+    <div class="space-y-4">
+        @foreach($tasks as $task)
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                {{-- Комментарии --}}
+                @if($task->comments->isNotEmpty())
+                    <div class="bg-gray-50 border-b border-amber-200 p-4">
+                        <h4 class="text-blue-500 font-semibold mb-2">Комментарии:</h4>
+                        <div class="space-y-2">
+                            @foreach($task->comments as $comment)
+                                <div class="flex justify-between text-sm text-gray-700">
+                                    <span>{{ $comment->text }}</span>
+                                    <time class="text-gray-500">{{ $comment->created_at->format('d.m.Y H:i') }}</time>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                @endforeach
-            </div>
-        @endif
-        <div class="flex justify-between items-center bg-white shadow-md @if($task->comments->isNotEmpty()) rounded-b-lg @else rounded-lg @endif p-4 mb-4">
-
-
-            <div class="flex flex-col">
-                <div class="flex gap-2 flex-col">
-                    <span class="font-bold">{{ $task->user->username }} {{ $task->user->surname }}</span>
-                    <p class="text-gray-600">Курс: <span class="text-black font-bold">{{ $task->module->title }}</span>
-                    </p>
-                </div>
-{{--                @foreach($task->ftpFiles as $path)--}}
-{{--                    @php--}}
-{{--                        $name = basename($path);--}}
-{{--                        $url  = route('admin.tasks.download', ['task' => $task->id, 'filename' => $name]);--}}
-{{--                    @endphp--}}
-{{--                    <a--}}
-{{--                        href="{{ $url }}"--}}
-{{--                        class="text-blue-600 hover:text-blue-900 mt-2"--}}
-{{--                    >Скачать {{ $name }}</a><br>--}}
-{{--                @endforeach--}}
-                <a
-                    href=""
-                    class="text-blue-600 hover:text-blue-900 mt-2"
-                >Скачать test </a>
-                                {{--                <p class="text-gray-600">Курс: <a class="text-black font-bold" href="{{ $domain->title }}">{{ $task->module->comment }}</a></p>--}}
-                @if($task->user->subdomains->isNotEmpty())
-                    <a class="text-black font-bold mt-2"
-                       href="{{ $task->user->subdomains->first()->title }}{{ $task->module->comment }}"><span
-                            class="text-gray-600">Ссылка: </span> {{ $task->module->comment }}</a>
-                @else
-                    <span class="text-gray-600">Ссылка: </span>Поддомен не найден
                 @endif
-            </div>
-            <div>
-                <form action="{{ route('admin.task.update', $task->id) }}" method="post"
-                      class="flex gap-2 items-center">
-                    @csrf
-                    @method('PUT')
-                    <input type="text" name="comment" id="" placeholder="Добавить комментарий" class="rounded-lg">
-                    <select name="status" id="status" class="px-4 py-2 border rounded-lg">
-                        <option value="pending" {{ $task->status == 'pending' ? 'selected' : '' }}>Ожидаемый</option>
-                        <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>Выполнено
-                        </option>
-                        <option value="failed" {{ $task->status == 'failed' ? 'selected' : '' }}>Ошибка выполнения
-                        </option>
-                    </select>
-                    <input type="submit" value="Изменить"
-                           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">
-                </form>
-            </div>
-        </div>
-    @endforeach
-    <div class="mt-4">
-        {{ $tasks->links() }}
-    </div>
 
+                {{-- Основная часть карточки --}}
+                <div class="p-4 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                    {{-- Левый блок: пользователь и модуль --}}
+                    <div class="flex-1 space-y-2">
+                        <p class="font-bold text-gray-800">
+                            {{ $task->user->username }} {{ $task->user->surname }}
+                            <span class="text-sm font-medium text-gray-600">({{ $task->user->group->title }})</span>
+                        </p>
+                        <p class="text-gray-600">
+                            Курс: <span class="font-semibold text-gray-800">{{ $task->module->course->title }}</span>
+                        </p>
+                        <p class="text-gray-600">
+                            Модуль: <span class="font-semibold text-gray-800">{{ $task->module->title }}</span>
+                        </p>
+                        <p class="text-gray-600">
+                            Ссылка:
+                            @if($task->user->subdomains->isNotEmpty())
+                                <a
+                                    href="{{ $task->user->subdomains->first()->title }}/{{ ltrim($task->module->comment, '/') }}"
+                                    class="font-semibold text-blue-600 hover:underline"
+                                >
+                                    {{ $task->module->comment }}
+                                </a>
+                            @else
+                                <span class="font-semibold">поддомен не найден</span>
+                            @endif
+                        </p>
+                    </div>
+
+                    {{-- Правый блок: форма --}}
+                    <form
+                        action="{{ route('admin.task.update', $task->id) }}"
+                        method="post"
+                        class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto"
+                    >
+                        @csrf
+                        @method('PUT')
+                        <input
+                            type="text"
+                            name="comment"
+                            placeholder="Добавить комментарий"
+                            class="border rounded-lg px-3 py-2 flex-1 focus:ring-0 focus:border-gray-300"
+                        >
+                        <select
+                            name="status"
+                            class="border rounded-lg px-3 py-2 focus:ring-0 focus:border-gray-300"
+                        >
+                            <option value="pending"   {{ $task->status=='pending'   ? 'selected' : '' }}>Ожидается</option>
+                            <option value="completed" {{ $task->status=='completed' ? 'selected' : '' }}>Выполнено</option>
+                            <option value="failed"    {{ $task->status=='failed'    ? 'selected' : '' }}>Ошибка</option>
+                        </select>
+                        <button
+                            type="submit"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        >
+                            Изменить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+
+        {{-- Пагинация --}}
+        <div class="mt-6">
+            {{ $tasks->links() }}
+        </div>
+    </div>
 @endsection

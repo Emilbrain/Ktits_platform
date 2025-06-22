@@ -1,52 +1,56 @@
 @extends('includes.layout')
 @section('h2-name', 'Список пользователей')
 @section('content')
-    <div class="flex gap-5">
-        <form class="max-w-lg mb-5" method="GET" action="{{ route('admin.list') }}">
-            <div class="flex flex-col sm:flex-row">
-                <!-- Dropdown Button for Categories -->
-                <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
-                        type="button">
-                    <!-- Display selected category or default text -->
-                    <span id="dropdown-text">{{ request('category', 'Все группы') }}</span>
-                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="m1 1 4 4 4-4"/>
-                    </svg>
-                </button>
+    <div class="flex flex-col md:flex-row gap-3 w-full flex-wrap mb-4">
+        <form class="w-full" method="GET" action="{{ route('admin.list') }}">
+            <div class="flex flex-col sm:flex-row gap-2 w-full">
+                <!-- Категории -->
+                <div class="relative w-full sm:w-auto">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                            class="w-full sm:w-auto inline-flex justify-between items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
+                            type="button">
+                        <span id="dropdown-text">{{ request('category', 'Все группы') }}</span>
+                        <svg class="w-3 h-3 ml-2" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
 
-                <!-- Dropdown Menu -->
-                <div id="dropdown"
-                     class="z-50 hidden left-28 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                        <li>
-                            <button type="submit"
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    onclick="setCategory('')">Все группы
-                            </button>
-                        </li>
-                        @foreach($groups as $item)
+                    <!-- Выпадающее меню -->
+                    <div id="dropdown"
+                         class="z-50 hidden absolute mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                             <li>
-                                <button type="submit"
-                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        onclick="setCategory('{{ $item->id }}')">{{ $item->title }}</button>
+                                <button type="submit" onclick="setCategory('')"
+                                        class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Все группы
+                                </button>
                             </li>
-                        @endforeach
-                    </ul>
+                            @foreach($groups as $item)
+                                <li>
+                                    <button type="submit" onclick="setCategory('{{ $item->id }}')"
+                                            class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        {{ $item->title }}
+                                    </button>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <input type="hidden" name="category" id="selected-category" value="{{ request('category') }}">
                 </div>
 
-                <!-- Hidden Input for Selected Category -->
-                <input type="hidden" name="category" id="selected-category" value="{{ request('category') }}">
-
-                <!-- Search Input -->
-                <div class="relative w-52">
-                    <input type="search" id="search-dropdown" name="search"
-                           class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                           placeholder="Поиск студента..." value="{{ request('search') }}"/>
+                <!-- Поиск -->
+                <div class="relative w-full sm:w-64">
+                    <input
+                        type="search"
+                        id="search-dropdown"
+                        name="search"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                        placeholder="Поиск студента..."
+                        value="{{ request('search') }}"
+                    />
                     <button type="submit"
-                            class=" bg-gra absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700">
+                            class=" bg-gra absolute top-0 end-0 p-2 text-sm font-medium h-full text-white rounded-e-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -57,8 +61,10 @@
                 </div>
             </div>
         </form>
+
+        <!-- Кнопка сброса -->
         <a href="{{ route('admin.list') }}"
-           class="p-[11px] text-sm text-white font-medium h-full bg-gray-800 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+           class="w-full sm:w-auto text-center p-2.5 text-sm text-white font-medium bg-gray-800 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
             Сбросить
         </a>
 
@@ -116,8 +122,8 @@
                         <td class="py-2 px-4 border-b text-center">{{ $student->username }}</td>
                         <td class="py-2 px-4 border-b text-center">{{ $student->surname }}</td>
                         <td class="py-2 px-4 border-b text-center">{{ $student->patronymic }}</td>
-                        <td class="px-6 py-4">{{ $student->group->title ?? 'Нет группы' }}</td>
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 border-b text-center">{{ $student->group->title ?? 'Нет группы' }}</td>
+                        <td class="px-6 py-4 border-b text-center">
                             <button class="copy-btn" data-login="{{ $student->login }}" data-password="{{ $student->pp }}">
                                 <i class='bx bx-copy'></i>
                             </button>

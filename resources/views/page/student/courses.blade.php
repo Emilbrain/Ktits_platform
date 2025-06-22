@@ -3,18 +3,23 @@
 @section('h2-name', 'Доступные курсы')
 
 @section('content')
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         @foreach($courses as $course)
-            <a href="{{ route('student.one.course', $course->id) }}" class="course-item bg-white rounded-xl p-3 flex flex-col items-center gap-3 justify-center h-full relative">
-                <img src="{{ asset('storage/' . $course->logo) }}" alt="" class="object-cover h-full max-h-36">
-                <h4 class="text-md">{{ $course->title }}</h4>
+            <a href="{{ route('student.one.course', $course->id) }}"
+               class="course-item bg-white rounded-xl p-3 flex flex-col items-center gap-3 justify-center h-full relative">
+                <img src="{{ asset('storage/' . $course->logo) }}"
+                     alt=""
+                     class="object-cover h-36 rounded-lg">
+                <h4 class="text-md text-center">{{ $course->title }}</h4>
                 @if ($course['progress'] !== null)
-                    <div class="progress-circle w-10 h-10 absolute right-2 top-2" id="progress-circle-{{ $course->id }}" data-progress="{{ $course['progress'] }}"></div>
+                    <div class="progress-circle w-10 h-10 absolute right-2 top-2"
+                         id="progress-circle-{{ $course->id }}"
+                         data-progress="{{ $course['progress'] }}">
+                    </div>
                 @endif
             </a>
         @endforeach
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

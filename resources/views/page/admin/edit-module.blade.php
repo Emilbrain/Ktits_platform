@@ -17,7 +17,6 @@
                 @enderror
             </div>
 
-            @if(!empty($module->video_link))
                 <div class="mb-6">
                     <video
                         id="my-video"
@@ -84,7 +83,6 @@
                         @enderror
                     </div>
                 </div>
-            @endif
 
 
 

@@ -31,7 +31,6 @@ class ModuleService
                 ->store('video', 'public');
         }
 
-        // 4) Загрузка аватара видео в storage/app/
         if ($request->hasFile('video_avatar')) {
             $data['video_avatar'] = $request
                 ->file('video_avatar')

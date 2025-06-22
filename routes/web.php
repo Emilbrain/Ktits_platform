@@ -7,8 +7,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherCourseGroupController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TheoryController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'showMain'])->name('index');
 
@@ -47,9 +47,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/theory/glav/{id}', [StudentController::class, 'showGlav'])->name('student.glav.theory');
     });
 
+
     // Маршруты для преподавателей
     Route::prefix('teacher')->group(function () {
-        Route::get('/', [TeacherController::class, 'showMain'])->name('teacher.main');
+        Route::get('/main', [TeacherController::class, 'showMain'])->name('teacher.main');
         Route::get('/requests', [TeacherController::class, 'showRequest'])->name('teacher.request');
         Route::get('/groups', [TeacherController::class, 'showGroups'])->name('teacher.groups');
 
@@ -124,8 +125,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/show/theory/module/{id}', [AdminController::class, 'showTheoryModule'])->name('admin.show.theory.module');
         Route::get('/show/theory/section/add/{id}', [AdminController::class, 'showAddTheorySection'])->name('admin.show.theory.section.add');
         Route::get('/show/theory/add/', [AdminController::class, 'showAddTheoryModule'])->name('admin.show.module.theory.add');
-        Route::post('theory/module/add', [AdminController::class, 'addTheoryModule'])->name('admin.store.theory.module');
-        Route::post('theory/section/store', [TheoryController::class, 'theorySectionStore'])->name('admin.store.theory.section');
+        Route::get('/show/theory/{id}/edit/', [AdminController::class, 'showEditTheoryModule'])->name('admin.edit.theory.module');
+        Route::get('/show/theory/glav/{id}/edit/', [AdminController::class, 'showEditTheoryModuleGlav'])->name('admin.edit.theory.module.glav');
+        Route::post('/theory/module/add', [AdminController::class, 'addTheoryModule'])->name('admin.store.theory.module');
+        Route::put('/theory/module/{id}/update', [TheoryController::class, 'updateTheoryModule'])->name('admin.update.theory.module');
+        Route::put('/theory/module/section/{id}/update', [TheoryController::class, 'updateTheoryModuleSectin'])->name('admin.edit.theory.section');
+        Route::post('/theory/section/store', [TheoryController::class, 'theorySectionStore'])->name('admin.store.theory.section');
+        Route::delete('theory/modules/{id}', [TheoryController::class, 'theoryDest'])->name('admin.del.module');
+        Route::delete('theory/modules/galav/{id}/delete', [TheoryController::class, 'theoryGlavDest'])->name('admin.glava.module.destroy');
 
         Route::get('/setting', [AdminController::class, 'setting'])->name('admin.setting');
         Route::post('/setting/update/telegram', [AdminController::class, 'updateTelegramUserName'])->name('admin.setting.update.telegram');

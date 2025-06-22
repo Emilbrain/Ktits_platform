@@ -436,40 +436,40 @@ class AdminController extends Controller
             ->with(['user.filezilla', 'module'])
             ->paginate(10);
 
-//        // 2) Пробегаем по каждой задаче и для неё собираем список файлов
-//        foreach ($tasks as $task) {
-//            $ftpConfig = optional($task->user->filezilla);
-//
-//            // Если у пользователя нет FTP-учётки — пропускаем
-//            if (! $ftpConfig) {
-//                $task->ftpFiles = [];
-//                continue;
-//            }
-//
-//            // 3) Динамически настраиваем диск student_ftp
-//            Config::set('filesystems.disks.student_ftp', [
-//                'driver'   => 'ftp',
-//                'host'     => $ftpConfig->host,
-//                'username' => $ftpConfig->username,
-//                'password' => $ftpConfig->password,
-//                // если FTP-юзер сразу попадает в public_html/{login}, можно оставить пустым:
-//                'root'     => '',
-//                'passive'  => true,
-//                'timeout'  => 30,
-//            ]);
-//
-//            $disk = Storage::disk('student_ftp');
-//
-//            // 4) Папка на FTP определяем по полю comment в модуле
-//            $folder = trim($task->module->comment ?: '', '/');
-//
-//            // 5) Если папка есть — получаем файлы, иначе пустой массив
-//            if ($folder && $disk->exists($folder)) {
-//                $task->ftpFiles = $disk->files($folder);
-//            } else {
-//                $task->ftpFiles = [];
-//            }
-//        }
+        // 2) Пробегаем по каждой задаче и для неё собираем список файлов
+        foreach ($tasks as $task) {
+            $ftpConfig = optional($task->user->filezilla);
+
+            // Если у пользователя нет FTP-учётки — пропускаем
+            if (! $ftpConfig) {
+                $task->ftpFiles = [];
+                continue;
+            }
+
+            // 3) Динамически настраиваем диск student_ftp
+            Config::set('filesystems.disks.student_ftp', [
+                'driver'   => 'ftp',
+                'host'     => $ftpConfig->host,
+                'username' => $ftpConfig->username,
+                'password' => $ftpConfig->password,
+                // если FTP-юзер сразу попадает в public_html/{login}, можно оставить пустым:
+                'root'     => '',
+                'passive'  => true,
+                'timeout'  => 30,
+            ]);
+
+            $disk = Storage::disk('student_ftp');
+
+            // 4) Папка на FTP определяем по полю comment в модуле
+            $folder = trim($task->module->comment ?: '', '/');
+
+            // 5) Если папка есть — получаем файлы, иначе пустой массив
+            if ($folder && $disk->exists($folder)) {
+                $task->ftpFiles = $disk->files($folder);
+            } else {
+                $task->ftpFiles = [];
+            }
+        }
 
         // 6) Передаём в представление
         return view('page.admin.tasks', compact('tasks'));
@@ -560,7 +560,16 @@ class AdminController extends Controller
     {
         return view('page.admin.add-theory-module');
     }
+    public function showEditTheoryModule($id){
+        $theory = Theory::findOrfail($id);
+        return view('page.admin.edit-theory-module', compact('theory'));
 
+    }
+    public function showEditTheoryModuleGlav($id){
+        $theory = TheorySections::findOrfail($id);
+        return view('page.admin.edit-theory_section', compact('theory'));
+
+    }
     public function showTheoryModule($id)
     {
         $theory = TheorySections::where('theory_id', $id)->get();
@@ -570,9 +579,10 @@ class AdminController extends Controller
     public function addTheoryModule(Request $request){
         $data = $request->validate([
             'title' => 'required|string|max:255|unique:theories,title',
-            'logo' => 'nullable|image|max:2048', // опционально, до 2 МБ
+            'logo' => 'required|nullable|image|max:2048', // опционально, до 2 МБ
         ], [
             'title.required' => 'Название обязательно',
+            'logo.required' => 'Логотип обязателен',
             'title.unique' => 'Модуль с таким названием уже существует',
             'logo.image'    => 'Файл должен быть изображением',
             'logo.max'      => 'Максимальный размер изображения — 2 МБ',
@@ -589,7 +599,7 @@ class AdminController extends Controller
 
         // 4) Редирект со сообщением об успехе
         return redirect()
-            ->route('admin.show.module.theory.add')
+            ->route('admin.show.theory')
             ->with('success', 'Модуль теории успешно создан');
     }
 

@@ -1,39 +1,35 @@
 @extends('includes.layout')
 @section('h2-name', 'Главная страница')
 @section('content')
-    <div class="flex flex-col lg:flex-row items-start gap-5 flex-wrap">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-5">
         <!-- Прогресс -->
-        <div class="w-full lg:max-w-sm bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-            <div class="flex justify-between mb-3">
-                <div class="flex items-center">
-                    <div class="flex justify-center items-center">
-                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">
-                            Прогресс выполнения 4 курс
-                        </h5>
-                    </div>
-                </div>
+        <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 sm:p-6 relative">
+            <div class="flex justify-between items-center mb-4">
+                <h5 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
+                    Прогресс выполнения 4 курс
+                </h5>
             </div>
-            <div class="py-6" id="radial-chart"></div>
+            <div id="radial-chart" class="min-h-[260px] sm:min-h-[300px] w-full py-4 sm:py-6"></div>
         </div>
 
         <!-- Карточки статистики -->
-        <div class="flex flex-col sm:flex-row flex-wrap gap-5 flex-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 col-span-1 lg:col-span-3">
             <!-- Курсы -->
-            <div class="flex-1 min-w-[220px] bg-white rounded-lg shadow dark:bg-gray-800 p-6 text-center">
+            <div class="bg-white max-h-[150px] rounded-lg shadow dark:bg-gray-800 p-6 text-center">
                 <i class="bx bx-book-open text-4xl text-blue-600 mb-2"></i>
                 <p class="text-sm text-gray-500">Всего курсов</p>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $coursesCount }}</p>
             </div>
 
             <!-- Студенты -->
-            <div class="flex-1 min-w-[220px] bg-white rounded-lg shadow dark:bg-gray-800 p-6 text-center">
+            <div class="bg-white max-h-[150px] rounded-lg shadow dark:bg-gray-800 p-6 text-center">
                 <i class="bx bx-user text-4xl text-green-600 mb-2"></i>
                 <p class="text-sm text-gray-500">Всего студентов</p>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $studentsCount }}</p>
             </div>
 
             <!-- Преподаватели -->
-            <div class="flex-1 min-w-[220px] bg-white rounded-lg shadow dark:bg-gray-800 p-6 text-center">
+            <div class="bg-white max-h-[150px] rounded-lg shadow dark:bg-gray-800 p-6 text-center">
                 <i class="bx bx-chalkboard text-4xl text-purple-600 mb-2"></i>
                 <p class="text-sm text-gray-500">Всего преподавателей</p>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $teachersCount }}</p>
@@ -42,8 +38,9 @@
     </div>
 
 
+
     <script>
-        const statuses = @json(array_keys($stats));       // ['pending','completed',…]
+        const statuses = @json(array_keys($stats));
         const counts = @json(array_values($stats));
         const getChartOptions = () => {
             return {
@@ -52,7 +49,7 @@
                 series: counts,
                 colors: ["#1C64F2", "#16BDCA", "#FDBA8C"],
                 chart: {
-                    height: "380px",
+                    height: 300,
                     width: "100%",
                     type: "radialBar",
                     sparkline: {
@@ -113,85 +110,16 @@
             }
         }
 
-        if (document.getElementById("radial-chart") && typeof ApexCharts !== 'undefined') {
-            const chart = new ApexCharts(document.querySelector("#radial-chart"), getChartOptions());
-            chart.render();
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById("radial-chart") && typeof ApexCharts !== 'undefined') {
+                const chart = new ApexCharts(document.querySelector("#radial-chart"), getChartOptions());
+
+                // ⏳ Подождем 300мс и отрисуем график
+                setTimeout(() => {
+                    chart.render();
+                }, 300); // Задержка перед появлением графика
+            }
+        });
     </script>
 
-    <script>
-
-        const options = {
-            chart: {
-                height: "100%",
-                maxWidth: "100%",
-                type: "area",
-                fontFamily: "Inter, sans-serif",
-                dropShadow: {
-                    enabled: false,
-                },
-                toolbar: {
-                    show: false,
-                },
-            },
-            tooltip: {
-                enabled: true,
-                x: {
-                    show: false,
-                },
-            },
-            fill: {
-                type: "gradient",
-                gradient: {
-                    opacityFrom: 0.55,
-                    opacityTo: 0,
-                    shade: "#1C64F2",
-                    gradientToColors: ["#1C64F2"],
-                },
-            },
-            dataLabels: {
-                enabled: false,
-            },
-            stroke: {
-                width: 6,
-            },
-            grid: {
-                show: false,
-                strokeDashArray: 4,
-                padding: {
-                    left: 2,
-                    right: 2,
-                    top: 0
-                },
-            },
-            series: [
-                {
-                    name: "New users",
-                    data: [6500, 6418, 6456, 6526, 6356, 6456],
-                    color: "#1A56DB",
-                },
-            ],
-            xaxis: {
-                categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-                labels: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-                axisTicks: {
-                    show: false,
-                },
-            },
-            yaxis: {
-                show: false,
-            },
-        }
-
-        if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-            const chart = new ApexCharts(document.getElementById("area-chart"), options);
-            chart.render();
-        }
-
-    </script>
 @endsection
