@@ -271,23 +271,21 @@
     </div>
 
 
-
-
-
     <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 
 
-
-
     <!-- Модальное окно -->
-    <div id="modal-teacher1" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition invisible">
+    <div id="modal-teacher1"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal('modal-teacher1')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher1')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Dinar.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Dinar.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Хайруллин Динар Ильсурович</p>
@@ -335,14 +333,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher2" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher2"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher2')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher2')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Alsu.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Alsu.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Зифарова Алсу Вильдановна</p>
@@ -383,14 +384,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher3" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher3"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher3')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher3')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Alina.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Alina.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Халиуллина Алина Рафаилевна</p>
@@ -418,14 +422,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher4" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher4"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher4')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher4')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Lily.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Lily.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Фазлиева Лилия Ришатовна</p>
@@ -456,14 +463,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher5" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher5"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher5')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher5')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Misha.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Misha.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
 
                      alt="Фото преподавателя">
                 <div>
@@ -499,14 +509,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher6" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher6"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher6')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher6')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/NiazG.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/NiazG.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
 
                      alt="Фото преподавателя">
                 <div>
@@ -533,14 +546,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher7" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher7"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto ">
-            <button onclick="closeModal('modal-teacher7')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher7')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/NIazN.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/NIazN.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Гатауллин Нияз Рамилевич</p>
@@ -570,14 +586,17 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher8" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher8"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal('modal-teacher8')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher8')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
 
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/Regina.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/Regina.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Данилкина Регина Сергеевна</p>
@@ -611,13 +630,16 @@
             </div>
         </div>
     </div>
-    <div id="modal-teacher9" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
+    <div id="modal-teacher9"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 invisible">
         <div class="bg-white rounded-lg max-w-[600px] w-full p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeModal('modal-teacher9')" class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
+            <button onclick="closeModal('modal-teacher9')"
+                    class="absolute top-0 right-0 sm:top-2 sm:right-2 sm:p-2 hover:text-gray-500">
                 <i class='bx bx-x text-2xl'></i>
             </button>
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-4 bg-[#3F83F8] p-4 rounded-lg text-white">
-                <img src="{{ asset('teacher/ruslan.jpg') }}" class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
+                <img src="{{ asset('teacher/ruslan.jpg') }}"
+                     class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] rounded-full object-cover"
                      alt="Фото преподавателя">
                 <div>
                     <p class="text-base sm:text-lg">Зарипов Руслан Ринатович</p>
@@ -762,6 +784,7 @@
         });
     });
 </script>
+
 <script>
     const data = {
         1: {
@@ -873,70 +896,87 @@
         },
         2: {
             left1: `
-     <p> Данная квалификация присваивается FrontEnd и BackEnd разработчикам, а именно Веб-дизайнерам и Веб-программистам. </p>
-            <p class="mt-[37px]" > На данном направление изучают современные технологии проектирования и создания макетов сайтов. </p>
-            <p class="mt-[37px]" > Разработчики WEB и мультимедийных приложений получают богаты опыт в реализации адаптивной верстки сайтов под мобильные, планшетный и компьютерные устройства. </p>
-            <p class="mt-[37px]" > На данной специализации изучают языки, как HTML, CSS, JavaScript и PHP, включая различные популярные фреймворки и CMS. </p>
-            <p class="mt-[37px]" > Разработчики веб и мультимедийных приложений сочетают в своей работе технические и дизайнерские знания и навыки для проведения анализа, проектирования, программирования и изменения веб-сайтов и приложений, объединяющих текстовые, графические, мультимедийные средства. </p>
-            <p class="mt-[37px]" > Данная специализация позволяет стать профессиональным программистом для создания WEB-приложений, корпоративных сайтов и Интернет-магазинов. </p>
-      `,
+               <p>
+                    Специальность 09.02.09 «Веб-разработка» готовит специалистов по созданию современных веб-приложений с акцентом на
+                    клиентскую часть (frontend). Выпускники получают навыки разработки интерактивных пользовательских интерфейсов,
+                    адаптивной вёрстки, работы с JavaScript-фреймворками и интеграции с серверными технологиями.
+               </p>
+`,
             left2: `
-               <h3 class="text-lg font-semibold mb-4">Ключевые профессиональные дисциплины:</h3>
+               <h3 class="text-lg font-semibold mb-4">Выпускник по направлению «Клиентская часть» умеет:</h3>
                     <ul class="space-y-3 text-sm mt-8">
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Проектирование и дизайн
-                            информационных систем
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i>  Разрабатывать адаптивные и кросс-браузерные веб-интерфейсы с использованием HTML5, CSS3.
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка
-                            веб-информационных систем
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Программировать интерактивные элементы на JavaScript (ES6+).
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Тестирование
-                            информационных систем
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Работать с фреймворками и библиотеками (React, Vue.js, Angular, Svelte).
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Разработка мобильных
-                            приложений
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i>  Оптимизировать производительность веб-приложений.
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Графический дизайн и
-                            мультимедиа
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Применять системы контроля версий (Git, GitHub/GitLab).
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Оптимизация
-                            веб-приложений
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Тестировать код (Jest, Cypress, Storybook).
                         </li>
-                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Безопасность
-                            веб-приложений
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-lg text-[#5190FB]'></i> Работать с UI/UX-дизайном (Figma, Adobe XD).
                         </li>
                     </ul>
 
             `,
             left3: `
-          <h3 class="text-lg font-semibold mb-4">Где можно работать после колледжа?</h3>
+          <h3 class="text-2xl font-semibold mb-4">Выпускник может работать:</h3>
                     <ul class="space-y-3 text-sm mt-6">
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Фронтенд-разработчик</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Бэкенд-разработчик</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Frontend-разработчиком</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Веб-программистом</li>
                         <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Fullstack-разработчик</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Веб-дизайнер</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Тестировщик ПО</li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Специалист по сопровождению
-                        </li>
-                        <li class="flex items-center gap-2"><i class='bx bxs-flame'></i> Контент-менеджер</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> UI/UX-разработчиком</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> JavaScript-инженером</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-flame text-[#5190FB]'></i> Fullstack-разработчиком (при изучении бэкенда)</li>
+
                     </ul>
-                    <div class="flex items-start text-[#3F83F8] text-[12px] mt-5">
-                        <i class='bx bx-info-circle text-[16px] mr-2'></i>
-                        <p>
-                            Можно работать в IT-компаниях, студиях веб-разработки, рекламных агентствах, фрилансе,
-                            стартапах или продолжить обучение в вузе.
+                    <div class="flex items-start  text-[12px] mt-5 p-4 bg-[#F2F8FF] rounded-xl">
+                        <i class='bx bx-info-circle text-[16px] mr-2 text-[#3F83F8]'></i>
+                        <p class="">
+                           <span class="font-bold">Компании: </span>  IT-стартапы, веб-студии, digital-агентства, корпоративный сектор.
                         </p>
                     </div>
 
             `,
+            left4: `
+                     <h3 class="text-2xl font-semibold mb-4">Изучаемые технологии и инструменты</h3>
+                    <ul class="space-y-3 text-sm mt-6">
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Языки: HTML5, CSS3, JavaScript (TypeScript).
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Стилизация: CSS Modules, Tailwind CSS, Styled Components.
+                        </li>
+                        <li class="flex items-start gap-2"><i class='bx bxs-heart text-[#3F83F8]'></i> Тестирование: Unit-тесты (Jest), E2E (Cypress).
+                        </li>
+                    </ul>
+            `,
+            left5: `
+                     <h3 class="text-2xl font-semibold mb-4">Преимущества профессии:</h3>
+                    <ul class="space-y-3 text-sm mt-7">
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i>  Востребованность на рынке труда.
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Высокий уровень зарплат (от 70 000 ₽ для junior).
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Возможность работать удалённо и на фрилансе.
+                        </li>
+                        <li class="flex items-center gap-2"><i class='bx bx-check text-[#5190FB]'></i> Постоянное развитие и изучение новых технологий.</li>
+                        </li>
+                    </ul>
+
+            `,
+
+
             info: `
-        <p class="flex flex-row items-center gap-4"> <i class='bx bx-time'></i> Срок обучения: 3 г. 10 мес.</p>
-        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-badge-check'></i> Квалификация: Разработчик веб и мультимедийных приложений</p>
-        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-book-open'></i> Форма обучения: очная</p>
-        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-user'></i> На базе: 9 классов</p>
-        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-bar-chart'></i> Бюджет: 50 мест, Коммерция: 25 мест</p>
+        <p class="flex flex-row items-center gap-4"> <i class='bx bx-time'></i> Срок обучения: 1 г. 10 мес.</p>
+        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-badge-check'></i> Квалификация: Разработчик веб-приложений</p>
+        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-book-open'></i> Форма обучения: Очно-дистанционное</p>
+        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-user'></i> На базе: 11 классов</p>
+        <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-bar-chart'></i> Бюджет: 0, Коммерция: 34 мест</p>
         <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-file'></i> Документ об образовании: диплом государственного образца о среднем профессиональном образовании</p>
         <p class="flex flex-row items-center gap-4 mt-7" ><i class='bx bx-building'></i> Предприятия для трудоустройства: АО «БАРС Груп», ОЭЗ Иннополис, Технопарк в сфере высоких технологий «ИТ-парк», Любые IT-компании</p>
-        <a href="#" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white text-black rounded text-sm"><i class='bx bx-download'></i> Скачать ФГОС 09.02.09</a>
+<!--        <a href="#" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white text-black rounded text-sm"><i class='bx bx-download'></i> Скачать ФГОС 09.02.09</a>-->
       `
         }
     };
